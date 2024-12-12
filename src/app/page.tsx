@@ -1,3 +1,10 @@
+import HeartLoader from './components/HeartLoader';
+import { Center } from '@mantine/core';
+
 export default function Home() {
-    return <></>;
+    return (
+        <Center w="full" h="95vh">
+            <HeartLoader />
+        </Center>
+    );
 }
