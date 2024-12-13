@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BackgroundImage, Box, Center, Text } from '@mantine/core';
+import { BackgroundImage, Box, Center, Text, Title } from '@mantine/core';
 
 export const Invitatii = () => {
     return (
         <Box h="100vh" miw="full">
-            <BackgroundImage h="100%" src="flowers.jpg">
-                <Center></Center>
-            </BackgroundImage>
+            <Title size="100px">Confirmare</Title>
+            <Text size="100px">Confirmare</Text>
         </Box>
     );
 };

@@ -19,3 +19,21 @@ body {
     background: var(--background);
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.lavishly-yours-regular {
+    font-family: 'Lavishly Yours', serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.arapey-regular {
+    font-family: 'Arapey', serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.arapey-regular-italic {
+    font-family: 'Arapey', serif;
+    font-weight: 400;
+    font-style: italic;
+}

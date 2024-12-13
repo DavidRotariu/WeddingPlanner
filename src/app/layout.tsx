@@ -17,10 +17,11 @@ export default function RootLayout({ children }: { children: any }) {
         <html lang="en" {...mantineHtmlProps}>
             <head>
                 <ColorSchemeScript />
-                <link rel="shortcut icon" href="/favicon.svg" />
-                <meta
-                    name="viewport"
-                    content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&family=Lavishly+Yours&display=swap"
+                    rel="stylesheet"
                 />
             </head>
             <body>
