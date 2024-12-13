@@ -1,19 +1,37 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Box, Flex, Radio, TextInput } from '@mantine/core';
+import { BackgroundImage, Box, Button, Flex, Radio, Text, TextInput, Image } from '@mantine/core';
 import { useState } from 'react';
 
 export const InvitatiForm = () => {
-    const [nrOfInvites, setNrOfInvites] = useState(4);
+    const [nrOfInvites, setNrOfInvites] = useState(3);
 
     return (
         <Flex direction="column" gap="lg" w="80%" py="xl">
-            <Box w="60%">
-                <TextInput label="Email" />
-            </Box>
+            <Flex direction="row" gap="md">
+                <Box w="40"></Box>
+                <Box w="50%">
+                    <TextInput label="Email" />
+                </Box>
+            </Flex>
 
             {Array.from({ length: nrOfInvites }).map((_, index) => (
                 <Flex direction="row" key={index} gap="md" w="full">
+                    <Flex w="40" align="end">
+                        {index === nrOfInvites - 1 && nrOfInvites > 1 && (
+                            <Button
+                                radius="50"
+                                w="40"
+                                p="0"
+                                variant="subtle"
+                                onClick={() => {
+                                    setNrOfInvites(nrOfInvites - 1);
+                                }}
+                            >
+                                <Image src="minus.svg" radius="sm" alt="minus"></Image>
+                            </Button>
+                        )}
+                    </Flex>
                     <Box w="30%">
                         <TextInput miw="4/10" label={`Nume ${index + 1}`} />
                     </Box>
@@ -30,6 +48,21 @@ export const InvitatiForm = () => {
                     </Flex>
                 </Flex>
             ))}
+            <Flex direction="row" gap="md">
+                <Box w="40"></Box>
+                <Button
+                    radius="50"
+                    w="40"
+                    h="40"
+                    p="0"
+                    variant="subtle"
+                    onClick={() => {
+                        setNrOfInvites(nrOfInvites + 1);
+                    }}
+                >
+                    <Image src="plus.svg" radius="sm" alt="plus"></Image>
+                </Button>
+            </Flex>
         </Flex>
     );
 };
