@@ -27,11 +27,11 @@ export const Invitatii = () => {
                     </Flex>
                 </>
             ) : (
-                <Flex justify="center" align="center">
-                    <Title size="8rem" py="sm" c="brown.1">
+                <Center h="90vh">
+                    <Title size="8rem" px="xl" c="brown.1">
                         Multumim pentru Confirmare!
                     </Title>
-                </Flex>
+                </Center>
             )}
         </Box>
     );

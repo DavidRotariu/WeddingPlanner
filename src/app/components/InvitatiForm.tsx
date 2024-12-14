@@ -5,7 +5,7 @@ import { BackgroundImage, Box, Button, Flex, Radio, Text, TextInput, Image } fro
 import { useState } from 'react';
 
 export const InvitatiForm = ({ setConfirmat }: any) => {
-    const [nrOfInvites, setNrOfInvites] = useState(3);
+    const [nrOfInvites, setNrOfInvites] = useState(2);
     const [email, setEmail] = useState('');
     const [invites, setInvites] = useState(
         Array.from({ length: nrOfInvites }).map(() => ({ name: '', surname: '', children: false }))
@@ -92,14 +92,14 @@ export const InvitatiForm = ({ setConfirmat }: any) => {
                     </Flex>
                     <Box w="30%">
                         <TextInput
-                            label={`Name ${index + 1}`}
+                            label={`Prenume ${index + 1}`}
                             value={invites[index].name}
                             onChange={(e) => handleInputChange(index, 'name', e.target.value)}
                         />
                     </Box>
                     <Box w="30%">
                         <TextInput
-                            label={`Surname ${index + 1}`}
+                            label={`Nume ${index + 1}`}
                             value={invites[index].surname}
                             onChange={(e) => handleInputChange(index, 'surname', e.target.value)}
                         />
@@ -123,10 +123,12 @@ export const InvitatiForm = ({ setConfirmat }: any) => {
                     <Image src="plus.svg" radius="sm" alt="plus" />
                 </Button>
             </Flex>
-
-            <Button onClick={handleSubmit} disabled={!isFormValid()}>
-                Submit
-            </Button>
+            <Flex direction="row" gap="md">
+                <Box w="40"></Box>
+                <Button onClick={handleSubmit} disabled={!isFormValid()} w="200">
+                    Submit
+                </Button>
+            </Flex>
         </Flex>
     );
 };
