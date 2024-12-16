@@ -15,9 +15,11 @@
         "@mantine/hooks": "^7.15.1",
         "@mantine/modals": "^7.15.1",
         "@mantine/notifications": "^7.15.1",
+        "konva": "^9.3.16",
         "next": "15.1.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
+        "react-konva": "^19.0.1",
         "styled-components": "^6.1.13"
     },
     "devDependencies": {

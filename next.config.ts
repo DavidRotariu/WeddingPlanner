@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+import { NextConfig } from 'next';
+const nextConfig = {
+    output: 'export',
+    webpack: (config: NextConfig) => {
+        config.externals = [...config.externals, { canvas: 'canvas' }]; // required to make Konva & react-konva work
+        return config;
+    }
 };
 
-export default nextConfig;
+module.exports = nextConfig;
