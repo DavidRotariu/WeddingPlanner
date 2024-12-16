@@ -71,11 +71,11 @@ function Canvas({ numTables }: CanvasProps) {
 
     return (
         <Stage
-            width={window.innerWidth - 50}
-            height={window.innerHeight - 50}
+            width={window.innerWidth}
+            height={window.innerHeight}
             draggable
             scaleX={scale}
-            scaleY={scale}
+            scaleY={scale}Impl
             onWheel={handleWheel}
             ref={stageRef}
             onMouseEnter={handleMouseEnter}

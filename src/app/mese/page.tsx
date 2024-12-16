@@ -1,5 +1,4 @@
 'use client';
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import dynamic from 'next/dynamic';
 import { NumberInput, Box, Flex, Title } from '@mantine/core';
@@ -9,11 +8,26 @@ const Canvas = dynamic(() => import('./Canvas'), { ssr: false });
 
 export default function HomePage() {
     const [numTables, setNumTables] = useState(5);
-    return (
-        <Flex h="100vh" miw="full">
-            <Flex w="250px" p="md" direction="column" justify="start" gap="md">
-                <Title size="3rem">Invitati</Title>
 
+    return (
+        <Box pos="relative" h="100vh" w="100vw" bg="offwhite.1">
+            <Canvas numTables={numTables} />
+
+            <Flex
+                pos="absolute"
+                top={0}
+                left={0}
+                w="250px"
+                h="100%"
+                bg="offwhite.1"
+                opacity={0.8}
+                p="md"
+                direction="column"
+                justify="start"
+                gap="md"
+                // z={10}
+            >
+                <Title size="3rem">Invitati</Title>
                 <NumberInput
                     label="Nr de mese"
                     value={numTables}
@@ -25,16 +39,24 @@ export default function HomePage() {
                 />
             </Flex>
 
-            {/* Main Content */}
-            <Box w="100%" bg="gray.0" p="md">
-                <Flex direction="column">
-                    <Title size="6rem" py="sm" c="brown.1">
-                        Locuri Mese
-                    </Title>
-                </Flex>
-
-                <Canvas numTables={numTables} />
-            </Box>
-        </Flex>
+            {/* Title */}
+            <Flex
+                pos="absolute"
+                top={0}
+                left="250px"
+                right={0}
+                h="100px"
+                align="center"
+                justify="center"
+                bg="offwhite.1"
+                opacity={0.8}
+                // zIndex={10}
+                px="md"
+            >
+                <Title size="6rem" py="sm" c="brown.1">
+                    Locuri Mese
+                </Title>
+            </Flex>
+        </Box>
     );
 }
