@@ -8,10 +8,11 @@ const Canvas = dynamic(() => import('./Canvas'), { ssr: false });
 
 export default function HomePage() {
     const [numTables, setNumTables] = useState(5);
+    const [defaultSeats, setDefaultSeats] = useState(6);
 
     return (
         <Box pos="relative" h="100vh" w="100vw" bg="offwhite.1">
-            <Canvas numTables={numTables} />
+            <Canvas numTables={numTables} seatsPerTable={defaultSeats} />
 
             <Flex
                 pos="absolute"
@@ -36,6 +37,15 @@ export default function HomePage() {
                     max={50}
                     step={1}
                     placeholder="Nr de mese"
+                />
+                <NumberInput
+                    label="Nr de locuri"
+                    value={defaultSeats}
+                    onChange={(value) => setDefaultSeats(value as number)}
+                    min={2}
+                    max={10}
+                    step={1}
+                    placeholder="Nr de locurui"
                 />
             </Flex>
 

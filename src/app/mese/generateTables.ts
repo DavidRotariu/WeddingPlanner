@@ -8,7 +8,7 @@ export const generateTables = (
 ) => {
     const tables = [];
     const xSpacing = spacing + 2 * tableRadius;
-    const ySpacing = Math.sqrt(2) * (spacing + tableRadius);
+    const ySpacing = spacing + tableRadius;
 
     const aspectRatio = (canvasWidth - 650) / (canvasHeight - 200);
     const cols = Math.ceil(Math.sqrt(numTables * aspectRatio));
@@ -17,12 +17,12 @@ export const generateTables = (
     let tableCount = 0;
 
     for (let row = 0; tableCount < numTables; row++) {
-        const tablesInRow = row % 2 === 0 ? cols : Math.max(1, cols - 1); // Ensure at least 1 table in staggered rows
+        const tablesInRow = row % 2 === 0 ? cols : Math.max(1, cols - 1);
 
         for (let col = 0; col < tablesInRow; col++) {
-            if (tableCount >= numTables) break; // Stop when all tables are added
+            if (tableCount >= numTables) break;
 
-            const x = col * xSpacing + (row % 2 === 0 ? 0 : xSpacing / 2); // Stagger odd rows
+            const x = col * xSpacing + (row % 2 === 0 ? 0 : xSpacing / 2);
             const y = row * ySpacing;
 
             tables.push({ id: `table-${tableCount + 1}`, x, y });

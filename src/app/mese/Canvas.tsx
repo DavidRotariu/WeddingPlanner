@@ -11,9 +11,10 @@ const Tables = dynamic(() => import('./Tables'), { ssr: false });
 
 type CanvasProps = {
     numTables: number;
+    seatsPerTable: number;
 };
 
-function Canvas({ numTables }: CanvasProps) {
+function Canvas({ numTables, seatsPerTable }: CanvasProps) {
     const [scale, setScale] = useState(1);
     const stageRef = useRef<Konva.Stage>(null);
 
@@ -75,7 +76,8 @@ function Canvas({ numTables }: CanvasProps) {
             height={window.innerHeight}
             draggable
             scaleX={scale}
-            scaleY={scale}Impl
+            scaleY={scale}
+            Impl
             onWheel={handleWheel}
             ref={stageRef}
             onMouseEnter={handleMouseEnter}
@@ -84,7 +86,7 @@ function Canvas({ numTables }: CanvasProps) {
             onMouseLeave={handleMouseLeave}
         >
             <Layer>
-                <Tables numTables={numTables} />
+                <Tables numTables={numTables} seatsPerTable={seatsPerTable} />
             </Layer>
         </Stage>
     );
