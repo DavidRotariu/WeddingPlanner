@@ -2,15 +2,11 @@
 import type { Metadata } from 'next';
 import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core';
 import { theme } from '../../theme';
-
+import '@mantine/core/styles.css';
 export const metadata: Metadata = {
     title: 'Invitatie',
     description: 'Invitatie la'
 };
-
-import '@mantine/core/styles.css';
-
-import React from 'react';
 
 export default function RootLayout({ children }: { children: any }) {
     return (

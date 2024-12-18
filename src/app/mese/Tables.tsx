@@ -15,8 +15,8 @@ function Tables({ numTables, seatsPerTable }: TablesProps) {
     const seatRadius = 25;
     const seatDistance = 120;
 
-    const canvasWidth = window.innerWidth - 50;
-    const canvasHeight = window.innerHeight - 50;
+    const canvasWidth = window.innerWidth - 300;
+    const canvasHeight = window.innerHeight - 100;
 
     const tables = generateTables(numTables, tableRadius, spacing, canvasWidth, canvasHeight);
 

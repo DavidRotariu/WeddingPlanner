@@ -10,7 +10,7 @@ export const generateTables = (
     const xSpacing = spacing + 2 * tableRadius;
     const ySpacing = spacing + tableRadius;
 
-    const aspectRatio = (canvasWidth - 650) / (canvasHeight - 200);
+    const aspectRatio = (canvasWidth - 300) / (canvasHeight - 100);
     const cols = Math.ceil(Math.sqrt(numTables * aspectRatio));
     const rows = Math.ceil(numTables / cols);
 
