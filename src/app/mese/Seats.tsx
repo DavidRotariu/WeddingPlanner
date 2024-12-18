@@ -2,58 +2,58 @@
 import { useDrop } from 'react-dnd';
 import { Circle, Group, Text } from 'react-konva';
 import Konva from 'konva'; // Import Konva for type definitions
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+
+type Guest = {
+    id?: string;
+    name?: string;
+    surname?: string;
+};
 
 type SeatProps = {
     x: number;
     y: number;
     index: number;
     radius: number;
-    guest: { id?: string };
+    guest: Guest;
+    onDrop: (seatIndex: number, guest: Guest) => void; // Callback to handle the drop event
+    tableId: string;
 };
 
-export const Seat = ({ x, y, index, radius, guest }: SeatProps) => {
-    const konvaRef = useRef<Konva.Circle>(null);
+export const Seat = ({ x, y, index, radius, guest, onDrop, tableId }: SeatProps) => {
+    const konvaRef = useRef<Konva.Group>(null);
 
-    const [seatState, setSeatState] = useState<'default' | 'hovered' | 'filled'>('default');
-
-    const [, dropRef] = useDrop(() => ({
+    const [{ isOver, canDrop }, dropRef] = useDrop(() => ({
         accept: 'GUEST',
-        drop: (item: { id: string; name: string; surname: string }) => {
-            setSeatState('filled');
-        },
-        hover: () => {
-            if (seatState !== 'filled') {
-                setSeatState('hovered');
+        drop: (item: Guest) => {
+            if (isOver) {
+                console.log(`Guest dropped on Table: ${tableId}, Seat: ${String.fromCharCode(65 + index)}`);
+                console.log('Guest Details:', item);
+                onDrop(index, item);
             }
         },
         collect: (monitor) => ({
-            isOver: monitor.isOver()
+            isOver: monitor.isOver(),
+            canDrop: monitor.canDrop()
         })
     }));
 
     useEffect(() => {
         if (konvaRef.current) {
-            const node = konvaRef.current.getStage()?.content as HTMLDivElement;
-            dropRef(node);
+            const domNode = konvaRef.current.getStage()?.content;
+            if (domNode) {
+                dropRef(domNode);
+            }
         }
     }, [dropRef]);
 
-    useEffect(() => {
-        if (seatState === 'hovered') {
-            const timeout = setTimeout(() => setSeatState('default'), 100);
-            return () => clearTimeout(timeout);
-        }
-    }, [seatState]);
-
     return (
-        <Group>
+        <Group ref={konvaRef}>
             <Circle
-                ref={konvaRef}
                 x={x}
                 y={y}
                 radius={radius}
-                fill={guest?.id ? '#C2A59E' : '#FFFAF9'}
+                fill={guest?.id ? '#C2A59E' : isOver && canDrop ? '#E8D4CF' : '#FFFAF9'} // Color changes on hover
                 stroke="#666057"
                 strokeWidth={2}
             />

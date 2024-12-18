@@ -18,9 +18,10 @@ type CanvasProps = {
     numTables: number;
     seatsPerTable: number;
     tables: Table[];
+    setTables: any;
 };
 
-function Canvas({ numTables, seatsPerTable, tables }: CanvasProps) {
+function Canvas({ numTables, seatsPerTable, tables, setTables }: CanvasProps) {
     const [scale, setScale] = useState(1);
     const stageRef = useRef<Konva.Stage>(null);
 
@@ -92,7 +93,7 @@ function Canvas({ numTables, seatsPerTable, tables }: CanvasProps) {
             onMouseLeave={handleMouseLeave}
         >
             <Layer>
-                <Tables numTables={numTables} seatsPerTable={seatsPerTable} tables={tables} />
+                <Tables numTables={numTables} seatsPerTable={seatsPerTable} tables={tables} setTables={setTables} />
             </Layer>
         </Stage>
     );

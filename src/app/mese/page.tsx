@@ -45,7 +45,7 @@ export default function HomePage() {
     return (
         <DndProvider backend={HTML5Backend}>
             <Box pos="relative" h="100vh" w="100vw" bg="offwhite.1">
-                <Canvas numTables={numTables} seatsPerTable={defaultSeats} tables={tables} />
+                <Canvas numTables={numTables} seatsPerTable={defaultSeats} tables={tables} setTables={setTables} />
                 <Sidebar
                     numTables={numTables}
                     setNumTables={setNumTables}
