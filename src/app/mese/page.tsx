@@ -1,22 +1,51 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import dynamic from 'next/dynamic';
 import { Box, Flex, Title } from '@mantine/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-
 const Canvas = dynamic(() => import('./Canvas'), { ssr: false });
+import { Guest } from '../types/tableTypes';
+
+type Table = {
+    id: string;
+    seats: number;
+    guests: Guest[];
+};
 
 export default function HomePage() {
     const [numTables, setNumTables] = useState(5);
     const [defaultSeats, setDefaultSeats] = useState(6);
+    const [tables, setTables] = useState<Table[]>([]);
+
+    useEffect(() => {
+        const fetchTables = async () => {
+            try {
+                const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/tables');
+                const data = await response.json();
+
+                const transformedData = data.map((table: any) => ({
+                    id: table.id,
+                    seats: parseInt(table.seats, 10),
+                    guests: Object.keys(table.guests).map((key) => table.guests[key] || {})
+                }));
+                console.log(transformedData);
+                setTables(transformedData);
+            } catch (error) {
+                console.error('Error fetching tables:', error);
+            }
+        };
+        fetchTables();
+    }, []);
 
     return (
         <DndProvider backend={HTML5Backend}>
             <Box pos="relative" h="100vh" w="100vw" bg="offwhite.1">
-                <Canvas numTables={numTables} seatsPerTable={defaultSeats} />
+                <Canvas numTables={numTables} seatsPerTable={defaultSeats} tables={tables} />
                 <Sidebar
                     numTables={numTables}
                     setNumTables={setNumTables}

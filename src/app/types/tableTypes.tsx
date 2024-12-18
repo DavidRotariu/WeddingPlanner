@@ -16,3 +16,13 @@ export interface Table {
     y: number;
     chairs: Chair[];
 }
+export interface Guest {
+    id?: string;
+    name?: string;
+    surname?: string;
+    email?: string;
+    children?: string;
+    seat?: string;
+    table?: string;
+    created_at?: string;
+}

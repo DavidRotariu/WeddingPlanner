@@ -6,15 +6,21 @@ import { Stage, Layer } from 'react-konva';
 import Konva from 'konva';
 import { useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
-
 const Tables = dynamic(() => import('./Tables'), { ssr: false });
+import { Guest } from '../types/tableTypes';
 
+type Table = {
+    id: string;
+    seats: number;
+    guests: Guest[];
+};
 type CanvasProps = {
     numTables: number;
     seatsPerTable: number;
+    tables: Table[];
 };
 
-function Canvas({ numTables, seatsPerTable }: CanvasProps) {
+function Canvas({ numTables, seatsPerTable, tables }: CanvasProps) {
     const [scale, setScale] = useState(1);
     const stageRef = useRef<Konva.Stage>(null);
 
@@ -86,7 +92,7 @@ function Canvas({ numTables, seatsPerTable }: CanvasProps) {
             onMouseLeave={handleMouseLeave}
         >
             <Layer>
-                <Tables numTables={numTables} seatsPerTable={seatsPerTable} />
+                <Tables numTables={numTables} seatsPerTable={seatsPerTable} tables={tables} />
             </Layer>
         </Stage>
     );

@@ -19,6 +19,10 @@ export default function RootLayout({ children }: { children: any }) {
                     href="https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&family=Lavishly+Yours&display=swap"
                     rel="stylesheet"
                 />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Arima:wght@100..700&display=swap"
+                    rel="stylesheet"
+                />
             </head>
             <body>
                 <MantineProvider theme={theme}>{children}</MantineProvider>
