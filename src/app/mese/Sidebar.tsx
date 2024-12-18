@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Flex, NumberInput, Text, Title } from '@mantine/core';
 import { useEffect, useState } from 'react';
+import { Guest } from './Guest';
 
 type Guest = {
     children: boolean;
@@ -62,23 +63,9 @@ export const Sidebar = ({ numTables, setNumTables, defaultSeats, setDefaultSeats
                 placeholder="Nr de locurui"
             />
             {guests.length > 0 ? (
-                guests.map((guest) => (
-                    <Text
-                        key={guest.id}
-                        style={{
-                            padding: '8px',
-                            margin: '4px 0',
-                            backgroundColor: 'white',
-                            border: '1px solid lightgray',
-                            borderRadius: '4px',
-                            textAlign: 'center'
-                        }}
-                    >
-                        {guest.name} {guest.surname}
-                    </Text>
-                ))
+                guests.map((guest) => <Guest key={guest.id} guest={guest} />)
             ) : (
-                <Text>No unassigned guests found.</Text>
+                <div>No unassigned guests found.</div>
             )}
         </Flex>
     );
