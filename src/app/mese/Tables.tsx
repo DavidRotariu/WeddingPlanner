@@ -1,5 +1,6 @@
 import React from 'react';
 import './Tables.css';
+import Seat from './Seat';
 
 type Guest = {
     id?: string;
@@ -35,28 +36,27 @@ const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables }) => {
                 });
 
                 return (
-                    <div key={table.id} className="table-container">
-                        {/* Table */}
+                    <div
+                        key={table.id}
+                        className={`table-container ${table.guests.every((guest) => guest.id) ? 'occupied' : ''}`}
+                    >
+                        {/* Table Number */}
                         <div className="table">{table.id}</div>
 
-                        {/* Seats */}
+                        {/* Render Seats */}
                         {seats.map((seat, idx) => {
-                            const x = 150 + 90 * Math.cos((seat.angle * Math.PI) / 180); // Adjust distance
-                            const y = 150 + 90 * Math.sin((seat.angle * Math.PI) / 180);
-
+                            const x = 50 + 30 * Math.cos((seat.angle * Math.PI) / 180); // Adjust distance
+                            const y = 50 + 30 * Math.sin((seat.angle * Math.PI) / 180);
                             const isOccupied = !!table.guests[idx]?.id;
 
                             return (
-                                <div
+                                <Seat
                                     key={seat.id}
-                                    className={`seat ${isOccupied ? 'occupied' : 'free'}`}
-                                    style={{
-                                        top: `${y}px`,
-                                        left: `${x}px`
-                                    }}
-                                >
-                                    {seat.label}
-                                </div>
+                                    tableId={table.id}
+                                    seat={seat}
+                                    isOccupied={isOccupied}
+                                    position={{ x, y }}
+                                />
                             );
                         })}
                     </div>
