@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import './Tables.css';
 
@@ -21,23 +20,18 @@ type TablesProps = {
     setTables: (tables: Table[]) => void;
 };
 
-const Tables2: React.FC<TablesProps> = ({ numTables, seatsPerTable, tables, setTables }) => {
-    const seatDistance = 100; // Distance from the table center for seats
-
-    // Handle table updates (e.g., assigning guests dynamically)
-    const handleUpdateTable = (tableId: string, updatedGuests: Guest[]) => {
-        setTables(tables.map((table) => (table.id === tableId ? { ...table, guests: updatedGuests } : table)));
-    };
+const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables }) => {
+    const seatLabels = ['A', 'B', 'C', 'D', 'E', 'F']; // Seat labels
 
     return (
-        <div className="tables-grid">
+        <div className="tables-container">
             {tables.map((table) => {
                 const seatCount = seatsPerTable;
 
                 // Generate seat positions
                 const seats = Array.from({ length: seatCount }).map((_, index) => {
                     const angle = (index / seatCount) * 360;
-                    return { id: index + 1, angle };
+                    return { id: index + 1, angle, label: seatLabels[index % seatLabels.length] };
                 });
 
                 return (
@@ -47,25 +41,21 @@ const Tables2: React.FC<TablesProps> = ({ numTables, seatsPerTable, tables, setT
 
                         {/* Seats */}
                         {seats.map((seat, idx) => {
-                            const x = 150 + seatDistance * Math.cos((seat.angle * Math.PI) / 180);
-                            const y = 150 + seatDistance * Math.sin((seat.angle * Math.PI) / 180);
+                            const x = 150 + 90 * Math.cos((seat.angle * Math.PI) / 180); // Adjust distance
+                            const y = 150 + 90 * Math.sin((seat.angle * Math.PI) / 180);
+
+                            const isOccupied = !!table.guests[idx]?.id;
 
                             return (
                                 <div
                                     key={seat.id}
-                                    className="seat"
+                                    className={`seat ${isOccupied ? 'occupied' : 'free'}`}
                                     style={{
                                         top: `${y}px`,
                                         left: `${x}px`
                                     }}
-                                    onClick={() => {
-                                        // Example interaction: assign a guest to this seat
-                                        const newGuests = [...table.guests];
-                                        newGuests[idx] = { id: `guest-${idx}`, name: `Guest ${idx + 1}` };
-                                        handleUpdateTable(table.id, newGuests);
-                                    }}
                                 >
-                                    {table.guests[idx]?.name || `Seat ${seat.id}`}
+                                    {seat.label}
                                 </div>
                             );
                         })}
@@ -76,4 +66,4 @@ const Tables2: React.FC<TablesProps> = ({ numTables, seatsPerTable, tables, setT
     );
 };
 
-export default Tables2;
+export default Tables;
