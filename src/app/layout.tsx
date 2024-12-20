@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core';
 import { theme } from '../../theme';
 import '@mantine/core/styles.css';
+import './globals.css';
+
 export const metadata: Metadata = {
     title: 'Invitatie',
     description: 'Invitatie la'

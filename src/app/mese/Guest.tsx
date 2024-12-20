@@ -11,7 +11,7 @@ type GuestProps = {
 
 export const Guest = forwardRef<HTMLDivElement, GuestProps>(({ guest }, ref) => {
     const [{ isDragging }, dragRef] = useDrag(() => ({
-        type: 'GUEST', // A unique identifier for the draggable item
+        type: 'GUEST',
         item: { id: guest.id, name: guest.name, surname: guest.surname },
         collect: (monitor) => ({
             isDragging: monitor.isDragging()

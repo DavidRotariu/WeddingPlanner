@@ -1,0 +1,59 @@
+/* Grid for displaying all tables */
+.tables-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+  background-color: #f8f8f8;
+}
+
+/* Parent container for each table */
+.table-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background-color: #f8f8f8;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+/* Table in the center */
+.table {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #4caf50;
+  border: 2px solid #388e3c;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+}
+
+/* Seats */
+.seat {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: 2px solid #666057;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #666057;
+  cursor: pointer;
+}
+
+/* Hover effect for seats */
+.seat:hover {
+  background-color: #d3e4cd;
+}

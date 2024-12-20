@@ -10,6 +10,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 const Canvas = dynamic(() => import('./Canvas'), { ssr: false });
 import { Guest } from '../types/tableTypes';
+import Tables2 from './Tables2';
 
 type Table = {
     id: string;
@@ -42,10 +43,18 @@ export default function HomePage() {
         fetchTables();
     }, []);
 
+    const seatCount = 6;
+    const seatDistance = 100;
+
+    const seats = Array.from({ length: seatCount }).map((_, index) => {
+        const angle = (index / seatCount) * 360;
+        return { id: index + 1, angle };
+    });
+
     return (
         <DndProvider backend={HTML5Backend}>
-            <Box pos="relative" h="100vh" w="100vw" bg="offwhite.1">
-                <Canvas numTables={numTables} seatsPerTable={defaultSeats} tables={tables} setTables={setTables} />
+            <Box h="100vh" w="100vw" bg="offwhite.1">
+                {/* <Canvas numTables={numTables} seatsPerTable={defaultSeats} tables={tables} setTables={setTables} /> */}
                 <Sidebar
                     numTables={numTables}
                     setNumTables={setNumTables}
@@ -67,6 +76,9 @@ export default function HomePage() {
                     <Title size="6rem" py="sm" c="brown.1">
                         Locuri Mese
                     </Title>
+                </Flex>
+                <Flex pos="relative" mt="100px" ml="250px">
+                    <Tables2 numTables={numTables} seatsPerTable={defaultSeats} tables={tables} setTables={setTables} />
                 </Flex>
             </Box>
         </DndProvider>

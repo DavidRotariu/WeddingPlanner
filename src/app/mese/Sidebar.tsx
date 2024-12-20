@@ -20,10 +20,17 @@ export const Sidebar = ({ numTables, setNumTables, defaultSeats, setDefaultSeats
 
     useEffect(() => {
         const fetchGuests = async () => {
-            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/guests/unassigned');
-            const data = await response.json();
-            console.log(data);
-            setGuests(data);
+            try {
+                const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/guests/unassigned');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data);
+                setGuests(data);
+            } catch (error) {
+                console.error('Error fetching guests:', error);
+            }
         };
 
         fetchGuests();
