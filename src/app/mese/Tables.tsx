@@ -21,7 +21,7 @@ type TablesProps = {
     setTables: (tables: Table[]) => void;
 };
 
-const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables }) => {
+const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables, setTables }) => {
     const seatLabels = ['A', 'B', 'C', 'D', 'E', 'F']; // Seat labels
 
     return (
@@ -56,6 +56,8 @@ const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables }) => {
                                     seat={seat}
                                     isOccupied={isOccupied}
                                     position={{ x, y }}
+                                    setTables={setTables}
+                                    tables={tables}
                                 />
                             );
                         })}

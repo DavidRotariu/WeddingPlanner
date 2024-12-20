@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef } from 'react';
 import { useDrop } from 'react-dnd';
 
 type Guest = {
-    id?: string;
-    name?: string;
-    surname?: string;
+    id: string;
+    name: string;
+    surname: string;
 };
 
 type SeatProps = {
@@ -13,40 +12,65 @@ type SeatProps = {
     seat: { id: number; label: string };
     isOccupied: boolean;
     position: { x: number; y: number };
+    tables: any[]; // Pass the full tables state
+    setTables: (updatedTables: any[]) => void; // Function to update the tables state
 };
 
-const interpolateColor = (color1: string, color2: string, factor: number) => {
-    const hexToRgb = (hex: string) =>
-        hex
-            .replace(/^#/, '')
-            .match(/.{1,2}/g)
-            ?.map((value) => parseInt(value, 16));
-
-    const rgbToHex = (rgb: number[]) =>
-        `#${rgb
-            .map((value) => {
-                const hex = value.toString(16);
-                return hex.length === 1 ? `0${hex}` : hex;
-            })
-            .join('')}`;
-
-    const rgb1 = hexToRgb(color1);
-    const rgb2 = hexToRgb(color2);
-
-    if (!rgb1 || !rgb2) return color1;
-
-    const interpolated = rgb1.map((value, index) => Math.round(value + factor * (rgb2[index] - value)));
-
-    return rgbToHex(interpolated);
-};
-
-const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position }) => {
+const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables, setTables }) => {
     const localRef = useRef<HTMLDivElement>(null);
+
+    const postGuestToSeat = async (guestId: string, tableId: string, seatLabel: string) => {
+        const payload = {
+            guest_id: guestId,
+            table: parseInt(tableId, 10),
+            seat: seatLabel
+        };
+
+        try {
+            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/guest/table', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                console.error('Error posting to the API:', error);
+                return;
+            }
+
+            const data = await response.json();
+            console.log('Successfully posted:', data);
+
+            // Update tables state
+            const updatedTables = tables.map((table) => {
+                if (table.id === data.table) {
+                    // Update the guests for the table
+                    const updatedGuests = [...table.guests];
+                    const seatIndex = seat.label.charCodeAt(0) - 65; // Convert seat label (A, B, ...) to index
+                    updatedGuests[seatIndex] = {
+                        id: data.id,
+                        name: data.name,
+                        surname: data.surname
+                    };
+                    return { ...table, guests: updatedGuests };
+                }
+                return table;
+            });
+
+            setTables(updatedTables); // Update the state
+        } catch (error) {
+            console.error('Error posting to the API:', error);
+        }
+    };
 
     const [{ isOver }, dropRef] = useDrop(() => ({
         accept: 'GUEST',
         drop: (guest: Guest) => {
-            console.log(`Dropped on Seat: ${seat.label}, Guest:`, guest);
+            console.log(`Dropped on Table: ${tableId}, Seat: ${seat.label}, Guest:`, guest);
+            postGuestToSeat(guest.id, tableId, seat.label); // Call the API when a guest is dropped
         },
         collect: (monitor) => ({
             isOver: monitor.isOver()
@@ -61,7 +85,7 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position }) => {
     const baseColor = '#FFFAF9';
     const occupiedColor = '#C2A59E';
     const hoverColor = isOver
-        ? interpolateColor(baseColor, occupiedColor, 0.5)
+        ? '#E8D6CB' // Adjusted hover color
         : isOccupied
           ? occupiedColor
           : baseColor;
