@@ -3,9 +3,9 @@ import './Tables.css';
 import Seat from './Seat';
 
 type Guest = {
-    id?: string;
-    name?: string;
-    surname?: string;
+    id: string;
+    name: string;
+    surname: string;
 };
 
 type Table = {
@@ -19,9 +19,11 @@ type TablesProps = {
     seatsPerTable: number;
     tables: Table[];
     setTables: (tables: Table[]) => void;
+    guests: Guest[];
+    setGuests: (updatedGuests: Guest[]) => void;
 };
 
-const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables, setTables }) => {
+const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables, setTables, guests, setGuests }) => {
     const seatLabels = ['A', 'B', 'C', 'D', 'E', 'F']; // Seat labels
 
     return (
@@ -58,6 +60,8 @@ const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables, setTables }) => 
                                     position={{ x, y }}
                                     setTables={setTables}
                                     tables={tables}
+                                    guests={guests}
+                                    setGuests={setGuests}
                                 />
                             );
                         })}

@@ -7,16 +7,24 @@ type Guest = {
     surname: string;
 };
 
+type Table = {
+    id: string;
+    seats: number;
+    guests: Guest[];
+};
+
 type SeatProps = {
     tableId: string;
     seat: { id: number; label: string };
     isOccupied: boolean;
     position: { x: number; y: number };
-    tables: any[]; // Pass the full tables state
-    setTables: (updatedTables: any[]) => void; // Function to update the tables state
+    tables: Table[]; // Pass the full tables state
+    setTables: (updatedTables: Table[]) => void; // Function to update the tables state
+    guests: Guest[];
+    setGuests: (updatedGuests: Guest[]) => void;
 };
 
-const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables, setTables }) => {
+const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables, setTables, guests, setGuests }) => {
     const localRef = useRef<HTMLDivElement>(null);
 
     const postGuestToSeat = async (guestId: string, tableId: string, seatLabel: string) => {
@@ -61,6 +69,9 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
             });
 
             setTables(updatedTables); // Update the state
+
+            const updatedGuestsList = guests.filter((guest) => guest.id !== data.id);
+            setGuests(updatedGuestsList);
         } catch (error) {
             console.error('Error posting to the API:', error);
         }

@@ -19,6 +19,7 @@ export default function HomePage() {
     const [numTables, setNumTables] = useState(5);
     const [defaultSeats, setDefaultSeats] = useState(6);
     const [tables, setTables] = useState<Table[]>([]);
+    const [guests, setGuests] = useState<Guest[]>([]);
 
     useEffect(() => {
         const fetchTables = async () => {
@@ -48,6 +49,8 @@ export default function HomePage() {
                     setNumTables={setNumTables}
                     defaultSeats={defaultSeats}
                     setDefaultSeats={setDefaultSeats}
+                    guests={guests}
+                    setGuests={setGuests}
                 />
                 <Flex
                     pos="absolute"
@@ -66,7 +69,14 @@ export default function HomePage() {
                     </Title>
                 </Flex>
                 <Flex pos="relative" mt="100px" ml="250px">
-                    <Tables numTables={numTables} seatsPerTable={defaultSeats} tables={tables} setTables={setTables} />
+                    <Tables
+                        numTables={numTables}
+                        seatsPerTable={defaultSeats}
+                        tables={tables}
+                        setTables={setTables}
+                        guests={guests}
+                        setGuests={setGuests}
+                    />
                 </Flex>
             </Box>
         </DndProvider>

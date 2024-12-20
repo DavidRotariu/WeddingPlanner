@@ -17,9 +17,9 @@ export interface Table {
     chairs: Chair[];
 }
 export interface Guest {
-    id?: string;
-    name?: string;
-    surname?: string;
+    id: string;
+    name: string;
+    surname: string;
     email?: string;
     children?: string;
     seat?: string;

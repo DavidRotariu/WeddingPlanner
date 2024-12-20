@@ -15,9 +15,7 @@ type Guest = {
     table: string;
 };
 
-export const Sidebar = ({ numTables, setNumTables, defaultSeats, setDefaultSeats }: any) => {
-    const [guests, setGuests] = useState<Guest[]>([]);
-
+export const Sidebar = ({ numTables, setNumTables, defaultSeats, setDefaultSeats, guests, setGuests }: any) => {
     useEffect(() => {
         const fetchGuests = async () => {
             try {
@@ -70,7 +68,7 @@ export const Sidebar = ({ numTables, setNumTables, defaultSeats, setDefaultSeats
                 placeholder="Nr de locurui"
             />
             {guests.length > 0 ? (
-                guests.map((guest) => <Guest key={guest.id} guest={guest} />)
+                guests.map((guest: Guest) => <Guest key={guest.id} guest={guest} />)
             ) : (
                 <div>No unassigned guests found.</div>
             )}
