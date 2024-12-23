@@ -38,7 +38,7 @@ export const Sidebar = ({ guests, setGuests, tables, setTables }: any) => {
 
     async function addTable() {
         const payload = {
-            seats: 6 // Fixed seats value
+            seats: seats
         };
 
         try {
