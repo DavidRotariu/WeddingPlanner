@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Flex, NumberInput, Text, Title } from '@mantine/core';
+import { Button, Flex, Image, NumberInput, Text, Title } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { Guest } from './Guest';
 
@@ -15,7 +15,9 @@ type Guest = {
     table: string;
 };
 
-export const Sidebar = ({ numTables, setNumTables, defaultSeats, setDefaultSeats, guests, setGuests }: any) => {
+export const Sidebar = ({ guests, setGuests, tables, setTables }: any) => {
+    const [seats, setSeats] = useState<string | number>(6);
+
     useEffect(() => {
         const fetchGuests = async () => {
             try {
@@ -34,6 +36,33 @@ export const Sidebar = ({ numTables, setNumTables, defaultSeats, setDefaultSeats
         fetchGuests();
     }, []);
 
+    async function addTable() {
+        const payload = {
+            seats: 6 // Fixed seats value
+        };
+
+        try {
+            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/table', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                console.error('Error adding table:', error);
+                return;
+            }
+            const data = await response.json();
+            console.log('Table added successfully:', data);
+
+            setTables((tables: any) => [...tables, data]);
+        } catch (error) {
+            console.error('Error adding table:', error);
+        }
+    }
+
     return (
         <Flex
             pos="absolute"
@@ -49,24 +78,12 @@ export const Sidebar = ({ numTables, setNumTables, defaultSeats, setDefaultSeats
             gap="md"
         >
             <Title size="3rem">Invitati</Title>
-            <NumberInput
-                label="Nr de mese"
-                value={numTables}
-                onChange={(value) => setNumTables(value as number)}
-                min={1}
-                max={50}
-                step={1}
-                placeholder="Nr de mese"
-            />
-            <NumberInput
-                label="Nr de locuri"
-                value={defaultSeats}
-                onChange={(value) => setDefaultSeats(value as number)}
-                min={2}
-                max={10}
-                step={1}
-                placeholder="Nr de locurui"
-            />
+            <Flex w="250px" direction="row" justify="center">
+                <NumberInput value={seats} onChange={setSeats} w="100" />
+                <Button radius="50" w="40" h="40" p="0" variant="subtle" onClick={addTable} mx="30">
+                    <Image src="plus.svg" radius="sm" alt="plus" />
+                </Button>
+            </Flex>
             {guests.length > 0 ? (
                 guests.map((guest: Guest) => <Guest key={guest.id} guest={guest} />)
             ) : (

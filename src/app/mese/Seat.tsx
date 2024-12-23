@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef } from 'react';
 import { useDrop } from 'react-dnd';
 
@@ -18,9 +19,9 @@ type SeatProps = {
     seat: { id: number; label: string };
     isOccupied: boolean;
     position: { x: number; y: number };
-    tables: Table[]; // Pass the full tables state
+    tables: any; // Pass the full tables state
     setTables: (updatedTables: Table[]) => void; // Function to update the tables state
-    guests: Guest[];
+    guests: any;
     setGuests: (updatedGuests: Guest[]) => void;
 };
 
@@ -53,7 +54,7 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
             console.log('Successfully posted:', data);
 
             // Update tables state
-            const updatedTables = tables.map((table) => {
+            const updatedTables = tables.map((table: Table) => {
                 if (table.id === data.table) {
                     // Update the guests for the table
                     const updatedGuests = [...table.guests];
@@ -70,7 +71,7 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
 
             setTables(updatedTables); // Update the state
 
-            const updatedGuestsList = guests.filter((guest) => guest.id !== data.id);
+            const updatedGuestsList = guests.filter((guest: Guest) => guest.id !== data.id);
             setGuests(updatedGuestsList);
         } catch (error) {
             console.error('Error posting to the API:', error);

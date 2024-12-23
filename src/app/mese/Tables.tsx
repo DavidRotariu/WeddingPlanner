@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import './Tables.css';
 import Seat from './Seat';
 
 type Guest = {
-    id: string;
-    name: string;
-    surname: string;
+    id?: string;
+    name?: string;
+    surname?: string;
+    seat?: string;
 };
 
 type Table = {
@@ -15,27 +17,20 @@ type Table = {
 };
 
 type TablesProps = {
-    numTables: number;
-    seatsPerTable: number;
     tables: Table[];
-    setTables: (tables: Table[]) => void;
+    setTables: any;
     guests: Guest[];
-    setGuests: (updatedGuests: Guest[]) => void;
+    setGuests: any;
 };
 
-const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables, setTables, guests, setGuests }) => {
-    const seatLabels = ['A', 'B', 'C', 'D', 'E', 'F']; // Seat labels
-
+const Tables: React.FC<TablesProps> = ({ tables, setTables, guests, setGuests }) => {
     return (
         <div className="tables-container">
             {tables.map((table) => {
-                const seatCount = seatsPerTable;
-
-                // Generate seat positions
-                const seats = Array.from({ length: seatCount }).map((_, index) => {
-                    const angle = (index / seatCount) * 360;
-                    return { id: index + 1, angle, label: seatLabels[index % seatLabels.length] };
-                });
+                const seatLabels = Array.from(
+                    { length: table.seats },
+                    (_, i) => String.fromCharCode(65 + i) // Generate seat labels dynamically (A, B, C, etc.)
+                );
 
                 return (
                     <div
@@ -46,16 +41,17 @@ const Tables: React.FC<TablesProps> = ({ seatsPerTable, tables, setTables, guest
                         <div className="table">{table.id}</div>
 
                         {/* Render Seats */}
-                        {seats.map((seat, idx) => {
-                            const x = 50 + 30 * Math.cos((seat.angle * Math.PI) / 180); // Adjust distance
-                            const y = 50 + 30 * Math.sin((seat.angle * Math.PI) / 180);
-                            const isOccupied = !!table.guests[idx]?.id;
+                        {seatLabels.map((label, idx) => {
+                            const guest = table.guests.find((g) => g.seat === label) || {}; // Find guest for this seat or return empty object
+                            const x = 50 + 30 * Math.cos((idx / table.seats) * 2 * Math.PI); // Adjust distance based on angle
+                            const y = 50 + 30 * Math.sin((idx / table.seats) * 2 * Math.PI);
+                            const isOccupied = !!guest.id;
 
                             return (
                                 <Seat
-                                    key={seat.id}
+                                    key={label}
                                     tableId={table.id}
-                                    seat={seat}
+                                    seat={{ id: idx, label }}
                                     isOccupied={isOccupied}
                                     position={{ x, y }}
                                     setTables={setTables}

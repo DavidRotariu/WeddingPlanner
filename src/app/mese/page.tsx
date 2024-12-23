@@ -16,8 +16,6 @@ type Table = {
 };
 
 export default function HomePage() {
-    const [numTables, setNumTables] = useState(5);
-    const [defaultSeats, setDefaultSeats] = useState(6);
     const [tables, setTables] = useState<Table[]>([]);
     const [guests, setGuests] = useState<Guest[]>([]);
 
@@ -44,14 +42,7 @@ export default function HomePage() {
     return (
         <DndProvider backend={HTML5Backend}>
             <Box h="100vh" w="100vw" bg="offwhite.1">
-                <Sidebar
-                    numTables={numTables}
-                    setNumTables={setNumTables}
-                    defaultSeats={defaultSeats}
-                    setDefaultSeats={setDefaultSeats}
-                    guests={guests}
-                    setGuests={setGuests}
-                />
+                <Sidebar tables={tables} setTables={setTables} guests={guests} setGuests={setGuests} />
                 <Flex
                     pos="absolute"
                     top={0}
@@ -69,14 +60,7 @@ export default function HomePage() {
                     </Title>
                 </Flex>
                 <Flex pos="relative" mt="100px" ml="250px">
-                    <Tables
-                        numTables={numTables}
-                        seatsPerTable={defaultSeats}
-                        tables={tables}
-                        setTables={setTables}
-                        guests={guests}
-                        setGuests={setGuests}
-                    />
+                    <Tables tables={tables} setTables={setTables} guests={guests} setGuests={setGuests} />
                 </Flex>
             </Box>
         </DndProvider>
