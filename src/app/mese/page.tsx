@@ -41,8 +41,24 @@ export default function HomePage() {
         fetchTables();
     }, []);
 
-    const handleButtonClick = () => {
-        console.log('Floating button clicked!');
+    const handleSendEmails = async () => {
+        try {
+            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/email/all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                console.error('Error sending emails:', error);
+                return;
+            }
+            const data = await response.json();
+            console.log('Emails sent successfully:', data);
+        } catch (error) {
+            console.error('Error sending emails:', error);
+        }
     };
 
     return (
@@ -74,11 +90,11 @@ export default function HomePage() {
                     right="20px"
                     size="lg"
                     color="#C2A59E"
-                    onClick={handleButtonClick}
+                    onClick={handleSendEmails}
                     radius="lg"
                     leftSection={<Image src="mail.svg" alt="mail" width="24" height="24" />}
                 >
-                    <span color="#666057">Trimite</span>
+                    <span style={{ color: '#666057' }}>Trimite</span>
                 </Button>
             </Box>
         </DndProvider>

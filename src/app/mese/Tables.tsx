@@ -41,7 +41,7 @@ const Tables: React.FC<TablesProps> = ({ tables, setTables, guests, setGuests })
             }
             const data = await response.json();
             console.log(`Successfully deleted table ${tableId}:`, data);
-            
+
             const transformedData = data.map((table: any) => ({
                 id: table.id,
                 seats: parseInt(table.seats, 10),
@@ -64,20 +64,22 @@ const Tables: React.FC<TablesProps> = ({ tables, setTables, guests, setGuests })
                         key={table.id}
                         className={`table-container ${table.guests.every((guest) => guest.id) ? 'occupied' : ''}`}
                     >
-                        <div className="table">
-                            {table.id}
-                            <sup
-                                className="close-button"
-                                onClick={() => handleDeleteTable(table.id)}
-                                style={{
-                                    cursor: 'pointer',
-                                    marginLeft: '6px',
-                                    fontSize: '2rem'
-                                }}
-                            >
-                                x
-                            </sup>
-                        </div>
+                        <button
+                            onClick={() => handleDeleteTable(table.id)}
+                            style={{
+                                position: 'absolute',
+                                top: '10px',
+                                right: '20px',
+                                color: '#666057',
+                                cursor: 'pointer',
+                                fontSize: '2rem',
+                                fontFamily: 'Arima'
+                            }}
+                        >
+                            ×
+                        </button>
+
+                        <div className="table">{table.id}</div>
 
                         {/* Render Seats */}
                         {seatLabels.map((label, idx) => {
