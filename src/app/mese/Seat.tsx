@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useState } from 'react';
-import { useDrop } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 
 type Guest = {
     id: string;
@@ -29,13 +30,15 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
     const localRef = useRef<HTMLDivElement>(null);
     const [showTooltip, setShowTooltip] = useState(false);
 
+    const currentTable = tables.find((table: any) => table.id === tableId);
+    const currentGuest = currentTable?.guests.find((g: any) => g.seat === seat.label);
+
     const postGuestToSeat = async (guestId: string, tableId: string, seatLabel: string) => {
         const payload = {
             guest_id: guestId,
             table: parseInt(tableId, 10),
             seat: seatLabel
         };
-
         try {
             const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/guest/table', {
                 method: 'POST',
@@ -50,37 +53,35 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
                 console.error('Error posting to the API:', error);
                 return;
             }
-
             const data = await response.json();
             console.log('Successfully posted:', data);
 
-            const updatedTables = tables.map((table: Table) => {
-                if (table.id === data.table) {
-                    const updatedGuests = [...table.guests];
-                    const seatIndex = seat.label.charCodeAt(0) - 65;
-                    updatedGuests[seatIndex] = {
-                        id: data.id,
-                        name: data.name,
-                        surname: data.surname
-                    };
-                    return { ...table, guests: updatedGuests };
-                }
-                return table;
-            });
-
-            setTables(updatedTables);
-
-            const updatedGuestsList = guests.filter((guest: Guest) => guest.id !== data.id);
-            setGuests(updatedGuestsList);
+            // TODO update tables and guest list on update
+            // setTables(data[0]); // updates tables
+            // const updatedGuestsList = guests.filter((guest: Guest) => guest.id !== data.id);
+            // setGuests(updatedGuestsList);
+            // console.log('new guests:', updatedGuestsList);
         } catch (error) {
             console.error('Error posting to the API:', error);
         }
     };
 
-    const [{ isOver }, dropRef] = useDrop(() => ({
+    const [{ isDragging }, drag] = useDrag(
+        () => ({
+            type: 'GUEST',
+            item: currentGuest,
+            canDrag: isOccupied,
+            collect: (monitor) => ({
+                isDragging: monitor.isDragging()
+            })
+        }),
+        [currentGuest, isOccupied]
+    );
+
+    const [{ isOver }, drop] = useDrop(() => ({
         accept: 'GUEST',
         drop: (guest: Guest) => {
-            console.log(`Dropped on Table: ${tableId}, Seat: ${seat.label}, Guest:`, guest);
+            // console.log(`Dropped on Table: ${tableId}, Seat: ${seat.label}, Guest:`, guest);
             postGuestToSeat(guest.id, tableId, seat.label);
         },
         collect: (monitor) => ({
@@ -88,10 +89,17 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
         })
     }));
 
-    const combinedRef = (node: HTMLDivElement | null) => {
-        dropRef(node);
-        if (localRef.current) localRef.current = node;
-    };
+    const combineRefs =
+        (...refs: any[]) =>
+        (node: any) => {
+            refs.forEach((ref) => {
+                if (typeof ref === 'function') {
+                    ref(node);
+                } else if (ref) {
+                    ref.current = node;
+                }
+            });
+        };
 
     const baseColor = '#FFFAF9';
     const occupiedColor = '#C2A59E';
@@ -101,7 +109,7 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
 
     return (
         <div
-            ref={localRef}
+            ref={combineRefs(localRef, drag, drop)}
             className={`seat ${isOccupied ? 'occupied' : 'free'}`}
             style={{
                 top: `${position.y}%`,
@@ -133,12 +141,14 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
                         backgroundColor: '#C2A59E',
                         color: '#666057',
                         padding: '6px 12px',
-                        // borderColor: '#666057',
                         borderRadius: '4px',
-                        fontSize: '12px',
+                        fontSize: '16px',
                         whiteSpace: 'nowrap',
                         zIndex: 20, // Ensure tooltip is on top of everything
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
+                    }}
+                    onClick={() => {
+                        console.log('hello');
                     }}
                 >
                     {`${guest.name} ${guest.surname}`}
