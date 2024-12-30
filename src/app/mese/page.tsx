@@ -31,8 +31,9 @@ export default function HomePage() {
                     seats: parseInt(table.seats, 10),
                     guests: Object.keys(table.guests).map((key) => table.guests[key] || {})
                 }));
-                
+
                 setTables(transformedData);
+                console.log(transformedData);
             } catch (error) {
                 console.error('Error fetching tables:', error);
             }

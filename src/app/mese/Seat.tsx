@@ -57,10 +57,18 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
             console.log('Successfully posted:', data);
 
             // TODO update tables and guest list on update
-            // setTables(data[0]); // updates tables
-            // const updatedGuestsList = guests.filter((guest: Guest) => guest.id !== data.id);
-            // setGuests(updatedGuestsList);
-            // console.log('new guests:', updatedGuestsList);
+
+            const tableData = data['assigned'];
+            const guestData = data['unassigned'];
+
+            const transformedData = tableData.map((table: any) => ({
+                id: table.id,
+                seats: parseInt(table.seats, 10),
+                guests: Object.keys(table.guests).map((key) => table.guests[key] || {})
+            }));
+
+            setTables(transformedData);
+            setGuests(guestData);
         } catch (error) {
             console.error('Error posting to the API:', error);
         }
