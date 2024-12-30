@@ -66,10 +66,7 @@ export const InvitatiForm = ({ setConfirmat }: any) => {
 
     const addInvite = () => {
         setNrOfInvites(nrOfInvites + 1);
-        setInvites([
-            ...invites,
-            { name: '', surname: '', children: false }
-        ]);
+        setInvites([...invites, { name: '', surname: '', children: false }]);
     };
 
     const removeInvite = () => {
@@ -78,109 +75,82 @@ export const InvitatiForm = ({ setConfirmat }: any) => {
     };
 
     return (
-        <Box 
-            mih="100vh" 
-            w="100%" 
-            p={mobileScreen ? "xs" : "xl"}
-            bg="offwhite.1"
-        >
+        <Box mih="100vh" w="100%" p={mobileScreen ? 'xs' : 'xl'} bg="offwhite.1">
             <Flex direction="column" align="center" w="100%">
-
-                <Box w={largeScreen ? "60%" : mediumScreen ? "70%" : "90%"} py="xl">
+                <Box w={largeScreen ? '60%' : mediumScreen ? '70%' : '90%'} py="xl">
                     <Flex direction="column" gap="xl">
-                        <TextInput 
-                            label="Email" 
-                            value={email} 
+                        <TextInput
+                            label="Email"
+                            value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            size={mobileScreen ? "sm" : "md"}
+                            size={mobileScreen ? 'sm' : 'md'}
                             styles={{
                                 label: { color: '#5C4B51', fontSize: mobileScreen ? '0.9rem' : '1rem' }
                             }}
                         />
 
                         {Array.from({ length: nrOfInvites }).map((_, index) => (
-                            
-                            <Flex 
-                                direction={mobileScreen ? "column" : "row"} 
-                                key={index} 
-                                gap="md" 
+                            <Flex
+                                direction={mobileScreen ? 'column' : 'row'}
+                                key={index}
+                                gap="md"
                                 w="100%"
-                                align={mobileScreen ? "stretch" : "end"}
+                                align={mobileScreen ? 'stretch' : 'end'}
                             >
                                 <TextInput
                                     label={`Prenume ${index + 1}`}
                                     value={invites[index].name}
                                     onChange={(e) => handleInputChange(index, 'name', e.target.value)}
-                                    size={mobileScreen ? "sm" : "md"}
+                                    size={mobileScreen ? 'sm' : 'md'}
                                     styles={{
                                         label: { color: '#5C4B51', fontSize: mobileScreen ? '0.9rem' : '1rem' }
                                     }}
-                                    w={mobileScreen ? "100%" : "40%"}
+                                    w={mobileScreen ? '100%' : '40%'}
                                 />
                                 <TextInput
                                     label={`Nume ${index + 1}`}
                                     value={invites[index].surname}
                                     onChange={(e) => handleInputChange(index, 'surname', e.target.value)}
-                                    size={mobileScreen ? "sm" : "md"}
+                                    size={mobileScreen ? 'sm' : 'md'}
                                     styles={{
                                         label: { color: '#5C4B51', fontSize: mobileScreen ? '0.9rem' : '1rem' }
                                     }}
-                                    w={mobileScreen ? "100%" : "40%"}
+                                    w={mobileScreen ? '100%' : '40%'}
                                 />
                                 <Flex align="center" gap="md">
                                     <Radio.Group
                                         value={invites[index].children ? 'copil' : 'adult'}
                                         onChange={(value) => handleRadioChange(index, value)}
-                                        size={mobileScreen ? "sm" : "md"}
+                                        size={mobileScreen ? 'sm' : 'md'}
                                     >
                                         <Flex direction="row" gap="xl">
                                             <Radio value="adult" label="Adult" />
                                             <Radio value="copil" label="Copil" />
                                         </Flex>
                                     </Radio.Group>
-                                    
                                 </Flex>
-                                {index === nrOfInvites - 1 && nrOfInvites > 1 && (
-                                        <Button 
-                                            radius="xl" 
-                                            w="30" 
-                                            h="30" 
-                                            p="0" 
-                                            variant="subtle" 
-                                            onClick={removeInvite}
-                                        >
-                                            <Image src="minus.svg" alt="minus" />
-                                        </Button>
-                                    )}
+                                {index === nrOfInvites - 1 && nrOfInvites > 1 ? (
+                                    <Button radius="xl" miw="30" mih="30" p="0" variant="subtle" onClick={removeInvite}>
+                                        <Image src="minus.svg" alt="minus" h="30" w="30" />
+                                    </Button>
+                                ) : (
+                                    <Box w="30" h="30"></Box>
+                                )}
                             </Flex>
-                            
                         ))}
 
-                        <Flex justify="center" gap="xl">
-                            <Button 
-                                radius="xl" 
-                                w="30" 
-                                h="30" 
-                                p="0" 
-                                variant="subtle" 
-                                onClick={addInvite}
-                            >
-                                <Image src="plus.svg" alt="plus" />
+                        <Flex justify="end" p="0">
+                            <Button radius="xl" miw="30" mah="30" p="0" variant="subtle" onClick={addInvite}>
+                                <Image src="plus.svg" alt="plus" h="30" w="30" />
                             </Button>
                         </Flex>
 
                         <Flex justify="center">
-                            <Button 
-                                onClick={handleSubmit} 
-                                disabled={!isFormValid()} 
-                                w={mobileScreen ? "100%" : "200"}
-                                size={mobileScreen ? "sm" : "md"}
-                                styles={{
-                                    root: {
-                                        color: 'white',
-                                        backgroundColor: '#a6486c'
-                                    }
-                                }}
+                            <Button
+                                onClick={handleSubmit}
+                                disabled={!isFormValid()}
+                                w={mobileScreen ? '100%' : '200'}
+                                size={mobileScreen ? 'sm' : 'md'}
                             >
                                 Confirmă prezența
                             </Button>
