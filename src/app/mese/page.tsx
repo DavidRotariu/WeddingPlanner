@@ -26,7 +26,9 @@ export default function HomePage() {
                 const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/tables');
                 const data = await response.json();
 
-                const transformedData = data.map((table: any) => ({
+                const tableData = data['assigned'];
+
+                const transformedData = tableData.map((table: any) => ({
                     id: table.id,
                     seats: parseInt(table.seats, 10),
                     guests: Object.keys(table.guests).map((key) => table.guests[key] || {})

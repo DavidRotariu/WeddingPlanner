@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Flex, Image, NumberInput, Text, Title } from '@mantine/core';
+import { Button, Flex, Image, NumberInput, ScrollArea, Text, Title } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { Guest } from './Guest';
 
@@ -84,11 +84,13 @@ export const Sidebar = ({ guests, setGuests, tables, setTables }: any) => {
                     <Image src="plus.svg" radius="sm" alt="plus" />
                 </Button>
             </Flex>
-            {guests.length > 0 ? (
-                guests.map((guest: Guest) => <Guest key={guest.id} guest={guest} />)
-            ) : (
-                <div>No unassigned guests found.</div>
-            )}
+            <ScrollArea w={250} h="100%">
+                {guests.length > 0 ? (
+                    guests.map((guest: Guest) => <Guest key={guest.id} guest={guest} />)
+                ) : (
+                    <div>No unassigned guests found.</div>
+                )}
+            </ScrollArea>
         </Flex>
     );
 };

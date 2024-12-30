@@ -56,8 +56,6 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
             const data = await response.json();
             console.log('Successfully posted:', data);
 
-            // TODO update tables and guest list on update
-
             const tableData = data['assigned'];
             const guestData = data['unassigned'];
 
@@ -71,6 +69,43 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
             setGuests(guestData);
         } catch (error) {
             console.error('Error posting to the API:', error);
+        }
+    };
+
+    const removeGuestFromSeat = async (guestId: string) => {
+        const payload = {
+            guest_id: guestId
+        };
+        try {
+            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/guest/table', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                console.error('Error removing guest from seat:', error);
+                return;
+            }
+            const data = await response.json();
+            console.log(`Successfully removed guest from table ${tableId}:`, data);
+
+            const tableData = data['assigned'];
+            const guestData = data['unassigned'];
+
+            const transformedData = tableData.map((table: any) => ({
+                id: table.id,
+                seats: parseInt(table.seats, 10),
+                guests: Object.keys(table.guests).map((key) => table.guests[key] || {})
+            }));
+
+            setTables(transformedData);
+            setGuests(guestData);
+        } catch (error) {
+            console.error('Error removing guest from seat:', error);
         }
     };
 
@@ -155,9 +190,7 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
                         zIndex: 20, // Ensure tooltip is on top of everything
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
                     }}
-                    onClick={() => {
-                        console.log('hello');
-                    }}
+                    onClick={() => removeGuestFromSeat(guest.id)}
                 >
                     {`${guest.name} ${guest.surname}`}
                 </div>
