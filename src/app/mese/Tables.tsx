@@ -41,7 +41,14 @@ const Tables: React.FC<TablesProps> = ({ tables, setTables, guests, setGuests })
             }
             const data = await response.json();
             console.log(`Successfully deleted table ${tableId}:`, data);
-            // Update tables
+            
+            const transformedData = data.map((table: any) => ({
+                id: table.id,
+                seats: parseInt(table.seats, 10),
+                guests: Object.keys(table.guests).map((key) => table.guests[key] || {})
+            }));
+
+            setTables(transformedData);
         } catch (error) {
             console.error('Error deleting table:', error);
         }

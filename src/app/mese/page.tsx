@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import { Box, Flex, Title } from '@mantine/core';
+import { Box, Button, Flex, Title } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Guest } from '../types/tableTypes';
 import Tables from './Tables';
+import Image from 'next/image';
 
 type Table = {
     id: string;
@@ -30,7 +31,7 @@ export default function HomePage() {
                     seats: parseInt(table.seats, 10),
                     guests: Object.keys(table.guests).map((key) => table.guests[key] || {})
                 }));
-                console.log(transformedData);
+                
                 setTables(transformedData);
             } catch (error) {
                 console.error('Error fetching tables:', error);
@@ -38,6 +39,10 @@ export default function HomePage() {
         };
         fetchTables();
     }, []);
+
+    const handleButtonClick = () => {
+        console.log('Floating button clicked!');
+    };
 
     return (
         <DndProvider backend={HTML5Backend}>
@@ -62,6 +67,18 @@ export default function HomePage() {
                 <Flex pos="relative" mt="100px" ml="250px">
                     <Tables tables={tables} setTables={setTables} guests={guests} setGuests={setGuests} />
                 </Flex>
+                <Button
+                    pos="fixed"
+                    bottom="20px"
+                    right="20px"
+                    size="lg"
+                    color="#C2A59E"
+                    onClick={handleButtonClick}
+                    radius="lg"
+                    leftSection={<Image src="mail.svg" alt="mail" width="24" height="24" />}
+                >
+                    <span color="#666057">Trimite</span>
+                </Button>
             </Box>
         </DndProvider>
     );
