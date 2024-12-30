@@ -24,26 +24,65 @@ type TablesProps = {
 };
 
 const Tables: React.FC<TablesProps> = ({ tables, setTables, guests, setGuests }) => {
+    const handleDeleteTable = async (tableId: string) => {
+        const payload = { table: Number(tableId) };
+        try {
+            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/table', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                console.error('Error deleting table:', error);
+                return;
+            }
+            const data = await response.json();
+            console.log(`Successfully deleted table ${tableId}:`, data);
+            
+            const transformedData = data.map((table: any) => ({
+                id: table.id,
+                seats: parseInt(table.seats, 10),
+                guests: Object.keys(table.guests).map((key) => table.guests[key] || {})
+            }));
+
+            setTables(transformedData);
+        } catch (error) {
+            console.error('Error deleting table:', error);
+        }
+    };
+
     return (
         <div className="tables-container">
             {tables.map((table) => {
-                const seatLabels = Array.from(
-                    { length: table.seats },
-                    (_, i) => String.fromCharCode(65 + i) // Generate seat labels dynamically (A, B, C, etc.)
-                );
+                const seatLabels = Array.from({ length: table.seats }, (_, i) => String.fromCharCode(65 + i));
 
                 return (
                     <div
                         key={table.id}
                         className={`table-container ${table.guests.every((guest) => guest.id) ? 'occupied' : ''}`}
                     >
-                        {/* Table Number */}
-                        <div className="table">{table.id}</div>
+                        <div className="table">
+                            {table.id}
+                            <sup
+                                className="close-button"
+                                onClick={() => handleDeleteTable(table.id)}
+                                style={{
+                                    cursor: 'pointer',
+                                    marginLeft: '6px',
+                                    fontSize: '2rem'
+                                }}
+                            >
+                                x
+                            </sup>
+                        </div>
 
                         {/* Render Seats */}
                         {seatLabels.map((label, idx) => {
-                            const guest = table.guests.find((g) => g.seat === label) || {}; // Find guest for this seat or return empty object
-                            const x = 50 + 30 * Math.cos((idx / table.seats) * 2 * Math.PI); // Adjust distance based on angle
+                            const guest = table.guests.find((g) => g.seat === label) || {};
+                            const x = 50 + 30 * Math.cos((idx / table.seats) * 2 * Math.PI);
                             const y = 50 + 30 * Math.sin((idx / table.seats) * 2 * Math.PI);
                             const isOccupied = !!guest.id;
 

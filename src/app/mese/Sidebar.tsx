@@ -38,7 +38,7 @@ export const Sidebar = ({ guests, setGuests, tables, setTables }: any) => {
 
     async function addTable() {
         const payload = {
-            seats: 6 // Fixed seats value
+            seats: seats
         };
 
         try {
@@ -79,7 +79,7 @@ export const Sidebar = ({ guests, setGuests, tables, setTables }: any) => {
         >
             <Title size="3rem">Invitati</Title>
             <Flex w="250px" direction="row" justify="center">
-                <NumberInput value={seats} onChange={setSeats} w="100" />
+                <NumberInput value={seats} onChange={setSeats} w="100" min={2} max={12} />
                 <Button radius="50" w="40" h="40" p="0" variant="subtle" onClick={addTable} mx="30">
                     <Image src="plus.svg" radius="sm" alt="plus" />
                 </Button>

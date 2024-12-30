@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: any }) {
                     rel="stylesheet"
                 />
             </head>
-            <body>
+            <body className="bg-[#FFFAF9]">
                 <MantineProvider theme={theme}>{children}</MantineProvider>
             </body>
         </html>
