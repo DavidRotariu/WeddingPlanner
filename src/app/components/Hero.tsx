@@ -18,7 +18,7 @@ export const Hero = () => {
     });
 
     useEffect(() => {
-        const weddingDate = new Date('2025-01-16T09:00:00');
+        const weddingDate = new Date('2025-03-01T09:00:00');
 
         const timer = setInterval(() => {
             const now = new Date();
@@ -39,16 +39,16 @@ export const Hero = () => {
         <Box h="100vh" miw="full">
             <BackgroundImage h="100%" src="background2.jpg">
                 <Flex direction="column" justify="center" align="center" h="110vh" gap="xl">
-                    <Title 
-                        size={largeScreen ? '10rem' : mediumScreen ? '8rem' : smallScreen ? '6rem' : '4rem'} 
-                        py="sm" 
+                    <Title
+                        size={largeScreen ? '10rem' : mediumScreen ? '8rem' : smallScreen ? '6rem' : '4rem'}
+                        py="sm"
                         c="white"
                         ta="center"
                     >
                         Ezekiel & Simona
                     </Title>
 
-                    <Flex gap={largeScreen ? "xl" : mediumScreen ? "lg" : "md"} align="center">
+                    <Flex gap={largeScreen ? 'xl' : mediumScreen ? 'lg' : 'md'} align="center">
                         <Box ta="center">
                             <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
                                 {timeLeft.days}
@@ -57,7 +57,9 @@ export const Hero = () => {
                                 Zile
                             </Text>
                         </Box>
-                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>:</Text>
+                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                            :
+                        </Text>
                         <Box ta="center">
                             <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
                                 {timeLeft.hours}
@@ -66,7 +68,9 @@ export const Hero = () => {
                                 Ore
                             </Text>
                         </Box>
-                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>:</Text>
+                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                            :
+                        </Text>
                         <Box ta="center">
                             <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
                                 {timeLeft.minutes}
@@ -75,7 +79,9 @@ export const Hero = () => {
                                 Minute
                             </Text>
                         </Box>
-                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>:</Text>
+                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                            :
+                        </Text>
                         <Box ta="center">
                             <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
                                 {timeLeft.seconds}

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useDisclosure } from '@mantine/hooks';
 import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -29,11 +30,13 @@ type SeatProps = {
 const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables, setTables, guests, setGuests }) => {
     const localRef = useRef<HTMLDivElement>(null);
     const [showTooltip, setShowTooltip] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const currentTable = tables.find((table: any) => table.id === tableId);
     const currentGuest = currentTable?.guests.find((g: any) => g.seat === seat.label);
 
     const postGuestToSeat = async (guestId: string, tableId: string, seatLabel: string) => {
+        setLoading(true);
         const payload = {
             guest_id: guestId,
             table: parseInt(tableId, 10),
@@ -69,10 +72,13 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
             setGuests(guestData);
         } catch (error) {
             console.error('Error posting to the API:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
     const removeGuestFromSeat = async (guestId: string) => {
+        setLoading(true);
         const payload = {
             guest_id: guestId
         };
@@ -106,6 +112,8 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
             setGuests(guestData);
         } catch (error) {
             console.error('Error removing guest from seat:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -174,7 +182,7 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
             {seat.label}
 
             {/* Tooltip */}
-            {showTooltip && guest.id && (
+            {showTooltip && guest?.id && !loading && (
                 <div
                     style={{
                         position: 'absolute',
@@ -193,6 +201,22 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
                     onClick={() => removeGuestFromSeat(guest.id)}
                 >
                     {`${guest.name} ${guest.surname}`}
+                </div>
+            )}
+            {loading && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        inset: 0,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                        borderRadius: '50%',
+                        zIndex: 25
+                    }}
+                >
+                    <span>...</span>
                 </div>
             )}
         </div>

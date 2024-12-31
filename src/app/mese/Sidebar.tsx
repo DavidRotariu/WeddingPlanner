@@ -77,20 +77,24 @@ export const Sidebar = ({ guests, setGuests, tables, setTables }: any) => {
             justify="start"
             gap="md"
         >
-            <Title size="3rem">Invitati</Title>
+            <Text size="1.8rem" fw="semibold">
+                Invitați fără locuri
+            </Text>
+            <ScrollArea w={300} h="80%">
+                <Flex h="full" wrap="wrap" gap="sm">
+                    {guests.length > 0 ? (
+                        guests.map((guest: Guest) => <Guest key={guest.id} guest={guest} />)
+                    ) : (
+                        <div>Nu sunt invitati fara locuri.</div>
+                    )}
+                </Flex>
+            </ScrollArea>{' '}
             <Flex w="250px" direction="row" justify="center">
                 <NumberInput value={seats} onChange={setSeats} w="100" min={2} max={12} />
                 <Button radius="50" w="40" h="40" p="0" variant="subtle" onClick={addTable} mx="30">
                     <Image src="plus.svg" radius="sm" alt="plus" />
                 </Button>
             </Flex>
-            <ScrollArea w={250} h="100%">
-                {guests.length > 0 ? (
-                    guests.map((guest: Guest) => <Guest key={guest.id} guest={guest} />)
-                ) : (
-                    <div>No unassigned guests found.</div>
-                )}
-            </ScrollArea>
         </Flex>
     );
 };
