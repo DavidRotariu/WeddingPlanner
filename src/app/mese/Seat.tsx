@@ -131,9 +131,11 @@ const Seat: React.FC<SeatProps> = ({ tableId, seat, isOccupied, position, tables
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: 'GUEST',
+        canDrop: () => !isOccupied, // Prevent dropping on an occupied seat
         drop: (guest: Guest) => {
-            // console.log(`Dropped on Table: ${tableId}, Seat: ${seat.label}, Guest:`, guest);
-            postGuestToSeat(guest.id, tableId, seat.label);
+            if (!isOccupied) {
+                postGuestToSeat(guest.id, tableId, seat.label);
+            }
         },
         collect: (monitor) => ({
             isOver: monitor.isOver()
