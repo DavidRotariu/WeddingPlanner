@@ -63,6 +63,8 @@ export default function HomePage() {
             console.log('Emails sent successfully:', data);
         } catch (error) {
             console.error('Error sending emails:', error);
+        } finally {
+            close();
         }
     };
 
