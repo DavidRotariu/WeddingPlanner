@@ -21,7 +21,7 @@ export const LocationCard = ({ eventTitle, eventSubtitle, location, time, date }
             <Flex 
                 direction={mobileScreen ? "column" : "row"} 
                 align="center" 
-                justify={largeScreen ? "left" : "center"} 
+                justify={largeScreen ? "left" : "center2"} 
                 wrap="wrap"
             >
                 <Flex 

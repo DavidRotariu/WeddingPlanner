@@ -26,7 +26,7 @@ export default function HomePage() {
     useEffect(() => {
         const fetchTables = async () => {
             try {
-                const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/tables');
+                const response = await fetch('https://mechanical-jacklyn-dvtech-310bbbab.koyeb.app/v1/tables');
                 const data = await response.json();
 
                 const tableData = data['assigned'];
@@ -48,7 +48,7 @@ export default function HomePage() {
 
     const handleSendEmails = async () => {
         try {
-            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/email/all', {
+            const response = await fetch('https://mechanical-jacklyn-dvtech-310bbbab.koyeb.app/v1/email/all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

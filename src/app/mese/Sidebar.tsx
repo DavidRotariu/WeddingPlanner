@@ -21,7 +21,7 @@ export const Sidebar = ({ guests, setGuests, tables, setTables }: any) => {
     useEffect(() => {
         const fetchGuests = async () => {
             try {
-                const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/guests/unassigned');
+                const response = await fetch('https://mechanical-jacklyn-dvtech-310bbbab.koyeb.app/v1/guests/unassigned');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -42,7 +42,7 @@ export const Sidebar = ({ guests, setGuests, tables, setTables }: any) => {
         };
 
         try {
-            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/table', {
+            const response = await fetch('https://mechanical-jacklyn-dvtech-310bbbab.koyeb.app/v1/table', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

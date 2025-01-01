@@ -27,7 +27,7 @@ const Tables: React.FC<TablesProps> = ({ tables, setTables, guests, setGuests })
     const handleDeleteTable = async (tableId: string) => {
         const payload = { table: Number(tableId) };
         try {
-            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/table', {
+            const response = await fetch('https://mechanical-jacklyn-dvtech-310bbbab.koyeb.app/v1/table', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

@@ -44,7 +44,7 @@ export const Location = () => {
                         eventSubtitle="civilă"
                         location="Primăria Salcea"
                         time="Ora 12:00"
-                        date="Miercuri, 8 ianuarie 2025"
+                        date="Sambătă, 1 Martie 2025"
                     />
                 </Center>
                 <Center w="100%">
@@ -53,7 +53,7 @@ export const Location = () => {
                         eventSubtitle="religioasă"
                         location="Biserica Penticostală Plopeni"
                         time="Ora 09:00"
-                        date="Duminică, 12 ianuarie 2025"
+                        date="Sambătă, 1 Martie 2025"
                     />
                 </Center>
                 <Center w="100%">
@@ -62,7 +62,7 @@ export const Location = () => {
                         eventSubtitle=""
                         location="La Filuță"
                         time="Ora 13:00"
-                        date="Miercuri, 12 ianuarie 2025"
+                        date="Sambătă, 1 Martie 2025"
                     />
                 </Center>
             </Flex>

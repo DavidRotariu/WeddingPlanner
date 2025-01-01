@@ -39,7 +39,7 @@ export const InvitatiForm = ({ setConfirmat }: any) => {
             }))
         };
         try {
-            const response = await fetch('https://accused-puffin-dvtech-d86fdbe0.koyeb.app/v1/guests/signup', {
+            const response = await fetch('https://mechanical-jacklyn-dvtech-310bbbab.koyeb.app/v1/guests/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
