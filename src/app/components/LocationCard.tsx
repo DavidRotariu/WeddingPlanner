@@ -17,9 +17,6 @@ export const LocationCard = ({ eventTitle, eventSubtitle, location, time, date, 
     const smallScreen = useMediaQuery('(max-width: 768px) and (min-width: 480px)');
     const mobileScreen = useMediaQuery('(max-width: 480px)');
 
-    const mapWidth = largeScreen ? '600px' : mediumScreen ? '500px' : '100%';
-    const mapHeight = largeScreen ? '300px' : mediumScreen ? '250px' : '200px';
-
     return (
         <Card shadow="sm" p="lg" radius="md" w="100%" maw="800" my="xs">
             <Flex
@@ -66,8 +63,8 @@ export const LocationCard = ({ eventTitle, eventSubtitle, location, time, date, 
                 <Flex justify="center" ml="auto">
                     <iframe
                         src={googleMapsUrl}
-                        width={mapWidth}
-                        height={mapHeight}
+                        width="100%"
+                        height="200"
                         style={{ border: 0, borderRadius: '8px' }}
                         allowFullScreen
                         loading="lazy"
