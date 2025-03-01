@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Table, ScrollArea } from '@mantine/core';
+import { Table, ScrollArea, Text } from '@mantine/core';
 
 type Guest = {
     id: string;
@@ -9,7 +9,11 @@ type Guest = {
     table: string | null;
 };
 
-const SearchTable = () => {
+type SearchTableProps = {
+    searchQuery: string;
+};
+
+const SearchTable = ({ searchQuery }: SearchTableProps) => {
     const [guests, setGuests] = useState<Guest[]>([]);
 
     useEffect(() => {
@@ -20,7 +24,6 @@ const SearchTable = () => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log(data);
                 setGuests(data);
             } catch (error) {
                 console.error('Error fetching guests:', error);
@@ -30,31 +33,47 @@ const SearchTable = () => {
         fetchGuests();
     }, []);
 
+    const filteredGuests = guests.filter((guest) => {
+        const fullName = `${guest.name} ${guest.surname}`.toLowerCase();
+        return fullName.includes(searchQuery.toLowerCase());
+    });
+
     return (
         <ScrollArea w="100%" h="500px">
-            <Table striped highlightOnHover withColumnBorders>
+            <Table striped highlightOnHover withColumnBorders horizontalSpacing="md" verticalSpacing="xs">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Table</th>
-                        <th>Seat</th>
+                        <th style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold' }}>Nume</th>
+                        <th style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold' }}>Masă / Loc</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {guests.length > 0 ? (
-                        guests.map((guest) => (
-                            <tr key={guest.id}>
-                                <td>{guest.name}</td>
-                                <td>{guest.surname}</td>
-                                <td>{guest.table ? `Table ${guest.table}` : 'Unassigned'}</td>
-                                <td>{guest.seat ? `Seat ${guest.seat}` : 'Unassigned'}</td>
-                            </tr>
-                        ))
+                    {filteredGuests.length > 0 ? (
+                        filteredGuests.map((guest) => {
+                            const isAssigned = guest.table !== 'None' && guest.seat !== 'None';
+                            const seatInfo = isAssigned ? `Masă ${guest.table}, Loc ${guest.seat}` : 'Nealocat';
+
+                            return (
+                                <tr key={guest.id}>
+                                    <td>
+                                        <Text size="md" fw={500} c="dark">
+                                            {guest.name} {guest.surname}
+                                        </Text>
+                                    </td>
+                                    <td>
+                                        <Text size="md" fw={500} c={isAssigned ? 'green.6' : 'red.6'}>
+                                            {seatInfo}
+                                        </Text>
+                                    </td>
+                                </tr>
+                            );
+                        })
                     ) : (
                         <tr>
-                            <td colSpan={4} style={{ textAlign: 'center', padding: '16px' }}>
-                                No invitees found.
+                            <td colSpan={2} style={{ textAlign: 'center', padding: '16px' }}>
+                                <Text size="lg" fw={500} c="gray.6">
+                                    Nicio potrivire găsită.
+                                </Text>
                             </td>
                         </tr>
                     )}
