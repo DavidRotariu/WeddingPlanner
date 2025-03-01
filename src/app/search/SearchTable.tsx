@@ -51,7 +51,7 @@ const SearchTable = ({ searchQuery }: SearchTableProps) => {
                     {filteredGuests.length > 0 ? (
                         filteredGuests.map((guest) => {
                             const isAssigned = guest.table !== 'None' && guest.seat !== 'None';
-                            const seatInfo = isAssigned ? `Masă ${guest.table}, Loc ${guest.seat}` : 'Nealocat';
+                            const seatInfo = isAssigned ? `Masa ${guest.table}, Loc ${guest.seat}` : 'Nealocat';
 
                             return (
                                 <tr key={guest.id}>
