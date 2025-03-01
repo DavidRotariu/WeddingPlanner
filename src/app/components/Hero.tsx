@@ -18,7 +18,7 @@ export const Hero = () => {
     });
 
     useEffect(() => {
-        const weddingDate = new Date('2025-03-01T09:00:00');
+        const weddingDate = new Date('2025-05-01T09:00:00');
 
         const timer = setInterval(() => {
             const now = new Date();
