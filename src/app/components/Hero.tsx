@@ -35,12 +35,15 @@ export const Hero = () => {
         return () => clearInterval(timer);
     }, []);
 
+    const backgroundImage = mobileScreen ? 'darkenedbackground.jpg' : 'background2.jpg';
+    const justifyContent = mobileScreen ? 'start' : 'center';
+
     return (
         <Box h="100vh" miw="full">
-            <BackgroundImage h="100%" src="background2.jpg">
-                <Flex direction="column" justify="center" align="center" h="110vh" gap="xl">
+            <BackgroundImage h="100%" src={backgroundImage}>
+                <Flex direction="column" justify={justifyContent} align="center" h="110vh" gap="xl">
                     <Title
-                        size={largeScreen ? '10rem' : mediumScreen ? '8rem' : smallScreen ? '6rem' : '4rem'}
+                        size={largeScreen ? '10rem' : mediumScreen ? '8rem' : smallScreen ? '6rem' : '3.5rem'}
                         py="sm"
                         c="white"
                         ta="center"
@@ -50,40 +53,40 @@ export const Hero = () => {
 
                     <Flex gap={largeScreen ? 'xl' : mediumScreen ? 'lg' : 'md'} align="center">
                         <Box ta="center">
-                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
                                 {timeLeft.days}
                             </Text>
                             <Text size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'} c="white">
                                 Zile
                             </Text>
                         </Box>
-                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
                             :
                         </Text>
                         <Box ta="center">
-                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
                                 {timeLeft.hours}
                             </Text>
                             <Text size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'} c="white">
                                 Ore
                             </Text>
                         </Box>
-                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
                             :
                         </Text>
                         <Box ta="center">
-                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
                                 {timeLeft.minutes}
                             </Text>
                             <Text size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'} c="white">
                                 Minute
                             </Text>
                         </Box>
-                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                        <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
                             :
                         </Text>
                         <Box ta="center">
-                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '3rem'} c="white" fw={700}>
+                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
                                 {timeLeft.seconds}
                             </Text>
                             <Text size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'} c="white">
