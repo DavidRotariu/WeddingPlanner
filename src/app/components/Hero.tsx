@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-import { BackgroundImage, Box, Center, Title, Flex, Text } from '@mantine/core';
+import { BackgroundImage, Box, Center, Title, Flex, Text, Image } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 
@@ -39,8 +39,16 @@ export const Hero = () => {
     const justifyContent = mobileScreen ? 'start' : 'center';
 
     return (
-        <Box h="100vh" miw="full">
-            <BackgroundImage h="100%" src={backgroundImage}>
+        <Box h="100vh" miw="full" style={{ overflow: 'hidden' }}>
+            <BackgroundImage
+                h="100%"
+                src={backgroundImage}
+                style={{
+                    backgroundPosition: 'center center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            >
                 {mobileScreen ? (
                     <Flex direction="column" justify={justifyContent} align="center" h="110vh" gap="xl">
                         {/* <Title
@@ -51,6 +59,10 @@ export const Hero = () => {
                         >
                             Ezekiel & Simona
                         </Title> */}
+
+                        <Box pos="absolute" top="50%" left="50%" style={{ transform: 'translate(-50%, -50%)' }} w="70%">
+                            <Image src="couple.jpg" alt="Ezekiel & Simona" width="auto" height="auto" fit="contain" />
+                        </Box>
 
                         <Flex gap={largeScreen ? 'xl' : mediumScreen ? 'lg' : 'md'} align="center" mt="auto" mb="9rem">
                             <Box ta="center">
