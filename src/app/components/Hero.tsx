@@ -35,7 +35,7 @@ export const Hero = () => {
         return () => clearInterval(timer);
     }, []);
 
-    const backgroundImage = mobileScreen ? 'backgroundmobile.png' : 'backgrounddesktop.png';
+    const backgroundImage = mobileScreen ? 'backgroundmobile.svg' : 'backgrounddesktop.png';
     const justifyContent = mobileScreen ? 'start' : 'center';
 
     return (
@@ -52,7 +52,7 @@ export const Hero = () => {
                             Ezekiel & Simona
                         </Title> */}
 
-                        <Flex gap={largeScreen ? 'xl' : mediumScreen ? 'lg' : 'md'} align="center" mt="auto" mb="10rem">
+                        <Flex gap={largeScreen ? 'xl' : mediumScreen ? 'lg' : 'md'} align="center" mt="auto" mb="9rem">
                             <Box ta="center">
                                 <Text
                                     style={{
