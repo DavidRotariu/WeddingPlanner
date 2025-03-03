@@ -35,7 +35,7 @@ export const Hero = () => {
         return () => clearInterval(timer);
     }, []);
 
-    const backgroundImage = mobileScreen ? 'darkenedbackground.jpg' : 'background5.png';
+    const backgroundImage = mobileScreen ? 'backgroundmobile.png' : 'background5.png';
     const justifyContent = mobileScreen ? 'start' : 'center';
 
     return (
@@ -43,54 +43,127 @@ export const Hero = () => {
             <BackgroundImage h="100%" src={backgroundImage}>
                 {mobileScreen ? (
                     <Flex direction="column" justify={justifyContent} align="center" h="110vh" gap="xl">
-                        <Title
+                        {/* <Title
                             size={largeScreen ? '10rem' : mediumScreen ? '8rem' : smallScreen ? '6rem' : '3.5rem'}
                             py="sm"
                             c="white"
                             ta="center"
                         >
                             Ezekiel & Simona
-                        </Title>
+                        </Title> */}
 
-                        <Flex gap={largeScreen ? 'xl' : mediumScreen ? 'lg' : 'md'} align="center">
+                        <Flex gap={largeScreen ? 'xl' : mediumScreen ? 'lg' : 'md'} align="center" mt="auto" mb="8rem">
                             <Box ta="center">
-                                <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
+                                <Text
+                                    style={{
+                                        fontFamily: 'Arima'
+                                    }}
+                                    size={largeScreen ? '5rem' : mediumScreen ? '4rem' : '2.5rem'}
+                                    c="#666057"
+                                    fw={700}
+                                >
                                     {timeLeft.days}
                                 </Text>
-                                <Text size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'} c="white">
+                                <Text
+                                    style={{
+                                        fontFamily: 'Arima'
+                                    }}
+                                    size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'}
+                                    c="#666057"
+                                >
                                     Zile
                                 </Text>
                             </Box>
-                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
+                            <Text
+                                style={{
+                                    fontFamily: 'Arima'
+                                }}
+                                size={largeScreen ? '5rem' : mediumScreen ? '4rem' : '2.5rem'}
+                                c="#666057"
+                                fw={700}
+                            >
                                 :
                             </Text>
                             <Box ta="center">
-                                <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
+                                <Text
+                                    style={{
+                                        fontFamily: 'Arima'
+                                    }}
+                                    size={largeScreen ? '5rem' : mediumScreen ? '4rem' : '2.5rem'}
+                                    c="#666057"
+                                    fw={700}
+                                >
                                     {timeLeft.hours}
                                 </Text>
-                                <Text size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'} c="white">
+                                <Text
+                                    style={{
+                                        fontFamily: 'Arima'
+                                    }}
+                                    size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'}
+                                    c="#666057"
+                                >
                                     Ore
                                 </Text>
                             </Box>
-                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
+                            <Text
+                                style={{
+                                    fontFamily: 'Arima'
+                                }}
+                                size={largeScreen ? '5rem' : mediumScreen ? '4rem' : '2.5rem'}
+                                c="#666057"
+                                fw={700}
+                            >
                                 :
                             </Text>
                             <Box ta="center">
-                                <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
+                                <Text
+                                    style={{
+                                        fontFamily: 'Arima'
+                                    }}
+                                    size={largeScreen ? '5rem' : mediumScreen ? '4rem' : '2.5rem'}
+                                    c="#666057"
+                                    fw={700}
+                                >
                                     {timeLeft.minutes}
                                 </Text>
-                                <Text size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'} c="white">
+                                <Text
+                                    style={{
+                                        fontFamily: 'Arima'
+                                    }}
+                                    size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'}
+                                    c="#666057"
+                                >
                                     Minute
                                 </Text>
                             </Box>
-                            <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
+                            <Text
+                                style={{
+                                    fontFamily: 'Arima'
+                                }}
+                                size={largeScreen ? '5rem' : mediumScreen ? '4rem' : '2.5rem'}
+                                c="#666057"
+                                fw={700}
+                            >
                                 :
                             </Text>
                             <Box ta="center">
-                                <Text size={largeScreen ? '6rem' : mediumScreen ? '4rem' : '2.5rem'} c="white" fw={700}>
+                                <Text
+                                    style={{
+                                        fontFamily: 'Arima'
+                                    }}
+                                    size={largeScreen ? '5rem' : mediumScreen ? '4rem' : '2.5rem'}
+                                    c="#666057"
+                                    fw={700}
+                                >
                                     {timeLeft.seconds}
                                 </Text>
-                                <Text size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'} c="white">
+                                <Text
+                                    style={{
+                                        fontFamily: 'Arima'
+                                    }}
+                                    size={largeScreen ? '2rem' : mediumScreen ? '1.5rem' : '1rem'}
+                                    c="#666057"
+                                >
                                     Secunde
                                 </Text>
                             </Box>
