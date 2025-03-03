@@ -60,7 +60,7 @@ export const Hero = () => {
                             Ezekiel & Simona
                         </Title> */}
 
-                        <Box pos="absolute" top="50%" left="50%" style={{ transform: 'translate(-50%, -50%)' }} w="62%">
+                        <Box pos="absolute" top="50%" left="50%" style={{ transform: 'translate(-50%, -45%)' }} w="62%">
                             <Image src="couple.jpg" alt="Ezekiel & Simona" width="auto" height="auto" fit="contain" />
                         </Box>
 
