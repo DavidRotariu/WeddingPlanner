@@ -30,11 +30,14 @@ export const Location = () => {
                     Locațiile evenimentelor
                 </Title>
                 <Text
+                    style={{
+                        fontFamily: 'Arima'
+                    }}
                     size={largeScreen ? '1.5rem' : mediumScreen ? '1.25rem' : smallScreen ? '1rem' : '0.875rem'}
                     pb="md"
                     c="brown.1"
                 >
-                    Te invităm să fii alături de noi în aceste momente speciale.
+                    Vă invităm să fiți alături de noi în aceste momente speciale.
                 </Text>
 
                 <Center w="100%">

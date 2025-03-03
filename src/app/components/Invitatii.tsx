@@ -17,23 +17,29 @@ export const Invitatii = () => {
             {!confirmat ? (
                 <>
                     <Flex direction="column" align="center">
-                        <Title 
-                            size={largeScreen ? '8rem' : mediumScreen ? '6rem' : smallScreen ? '4rem' : '3rem'} 
-                            py="sm" 
+                        <Title
+                            size={largeScreen ? '8rem' : mediumScreen ? '6rem' : smallScreen ? '4rem' : '3rem'}
+                            py="sm"
                             c="brown.1"
                             ta="center"
                         >
                             Confirmare
                         </Title>
-                        <Text 
+                        <Text
+                            style={{
+                                fontFamily: 'Arima'
+                            }}
                             size={largeScreen ? '1.5rem' : mediumScreen ? '1.25rem' : smallScreen ? '1rem' : '0.875rem'}
-                            py="xs" 
+                            py="xs"
                             c="brown.1"
                             ta="center"
                         >
-                            Te așteptăm cu drag!
+                            Vă așteptăm cu drag!
                         </Text>
-                        <Text 
+                        <Text
+                            style={{
+                                fontFamily: 'Arima'
+                            }}
                             size={largeScreen ? '1.5rem' : mediumScreen ? '1.25rem' : smallScreen ? '1rem' : '0.875rem'}
                             c="brown.1"
                             ta="center"
@@ -48,9 +54,9 @@ export const Invitatii = () => {
                 </>
             ) : (
                 <Center h="90vh">
-                    <Title 
+                    <Title
                         size={largeScreen ? '8rem' : mediumScreen ? '6rem' : smallScreen ? '4rem' : '3rem'}
-                        px="xl" 
+                        px="xl"
                         c="brown.1"
                         ta="center"
                     >

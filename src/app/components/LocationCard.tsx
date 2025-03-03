@@ -43,19 +43,37 @@ export const LocationCard = ({ eventTitle, eventSubtitle, location, time, date, 
                 <Flex direction="column" justify="center" align={largeScreen ? 'left' : 'center'} gap="xs">
                     <Flex gap="sm" direction="row" align="center">
                         <Image src="location.svg" alt="Location Icon" width={24} height={24} />
-                        <Text size={largeScreen ? 'md' : mediumScreen ? 'sm' : 'xs'} c="#7A8FA2">
+                        <Text
+                            style={{
+                                fontFamily: 'Arima'
+                            }}
+                            size={largeScreen ? 'md' : mediumScreen ? 'sm' : 'xs'}
+                            c="#7A8FA2"
+                        >
                             {location}
                         </Text>
                     </Flex>
                     <Flex gap="sm" direction="row" align="center">
                         <Image src="time.svg" alt="Time Icon" width={24} height={24} />
-                        <Text size={largeScreen ? 'md' : mediumScreen ? 'sm' : 'xs'} c="gray">
+                        <Text
+                            style={{
+                                fontFamily: 'Arima'
+                            }}
+                            size={largeScreen ? 'md' : mediumScreen ? 'sm' : 'xs'}
+                            c="gray"
+                        >
                             {time}
                         </Text>
                     </Flex>
                     <Flex gap="sm" direction="row" align="center">
                         <Image src="calendar.svg" alt="Calendar Icon" width={24} height={24} />
-                        <Text size={largeScreen ? 'md' : mediumScreen ? 'sm' : 'xs'} c="gray">
+                        <Text
+                            style={{
+                                fontFamily: 'Arima'
+                            }}
+                            size={largeScreen ? 'md' : mediumScreen ? 'sm' : 'xs'}
+                            c="gray"
+                        >
                             {date}
                         </Text>
                     </Flex>
