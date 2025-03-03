@@ -35,7 +35,7 @@ export const Hero = () => {
         return () => clearInterval(timer);
     }, []);
 
-    const backgroundImage = mobileScreen ? 'backgroundmobile.svg' : 'backgrounddesktop.png';
+    const backgroundImage = mobileScreen ? 'mobile.svg' : 'backgrounddesktop.png';
     const justifyContent = mobileScreen ? 'start' : 'center';
 
     return (
@@ -44,8 +44,8 @@ export const Hero = () => {
                 h="100%"
                 src={backgroundImage}
                 style={{
-                    backgroundPosition: 'center center',
                     backgroundSize: 'cover',
+                    backgroundPosition: 'center center',
                     backgroundRepeat: 'no-repeat'
                 }}
             >
@@ -60,7 +60,7 @@ export const Hero = () => {
                             Ezekiel & Simona
                         </Title> */}
 
-                        <Box pos="absolute" top="50%" left="50%" style={{ transform: 'translate(-50%, -50%)' }} w="70%">
+                        <Box pos="absolute" top="50%" left="50%" style={{ transform: 'translate(-50%, -50%)' }} w="62%">
                             <Image src="couple.jpg" alt="Ezekiel & Simona" width="auto" height="auto" fit="contain" />
                         </Box>
 
