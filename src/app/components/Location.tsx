@@ -39,23 +39,12 @@ export const Location = () => {
                 >
                     Vă invităm să fiți alături de noi în aceste momente speciale.
                 </Text>
-
-                <Center w="100%">
-                    <LocationCard
-                        eventTitle="Cununia"
-                        eventSubtitle="civilă"
-                        location="Primăria Salcea"
-                        time="Ora 12:00"
-                        date="Sambătă, 1 Mai 2025"
-                        googleMapsUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10750.688723580053!2d26.3519077291043!3d47.65193687866909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4734fb5668f61625%3A0x48125e70fdce3bbf!2sPrim%C4%83ria%20Salcea!5e0!3m2!1sen!2sro!4v1740846668429!5m2!1sen!2sro"
-                    />
-                </Center>
                 <Center w="100%">
                     <LocationCard
                         eventTitle="Cununia"
                         eventSubtitle="religioasă"
                         location="Biserica Penticostală Plopeni"
-                        time="Ora 09:00"
+                        time="Ora 14:00"
                         date="Sambătă, 1 Mai 2025"
                         googleMapsUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2687.207740539041!2d26.33037631227405!3d47.660960584101474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4734fb7dbb870703%3A0x104bca4f2f001d1!2sBiserica%20Penticostal%C4%83%20Plopeni!5e0!3m2!1sen!2sro!4v1740846590946!5m2!1sen!2sro"
                     />
@@ -64,8 +53,8 @@ export const Location = () => {
                     <LocationCard
                         eventTitle="Masa"
                         eventSubtitle=""
-                        location="La Filuță"
-                        time="Ora 13:00"
+                        location="La Filuță (Mălini)"
+                        time="Ora 17:00"
                         date="Sambătă, 1 Mai 2025"
                         googleMapsUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2702.8972329843477!2d25.963629412260467!3d47.35540430516944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47350c9bb7a2e975%3A0xf8deb37fa7217508!2zUGVuc2l1bmVhIExhIEZpbHXFo8SD!5e0!3m2!1sen!2sro!4v1740846635661!5m2!1sen!2sro"
                     />
