@@ -1,3 +1,4 @@
+import { Footer } from './components/Footer';
 import { Hero } from './components/Hero';
 import { Invitatii } from './components/Invitatii';
 import { Location } from './components/Location';
@@ -8,6 +9,7 @@ export default function Home() {
             <Hero />
             <Location />
             <Invitatii />
+            <Footer />
         </>
     );
 }

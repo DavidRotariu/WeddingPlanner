@@ -75,7 +75,7 @@ export const InvitatiForm = ({ setConfirmat }: any) => {
     };
 
     return (
-        <Box mih="100vh" w="100%" p={mobileScreen ? 'xs' : 'xl'} bg="offwhite.1">
+        <Box w="100%" p={mobileScreen ? 'xs' : 'xl'} bg="offwhite.1">
             <Flex direction="column" align="center" w="100%">
                 <Box w={largeScreen ? '60%' : mediumScreen ? '70%' : '90%'} py="xl">
                     <Flex direction="column" gap="xl">
